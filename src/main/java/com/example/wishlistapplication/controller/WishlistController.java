@@ -11,15 +11,14 @@ public class WishlistController {
 
     WishlistRepository wishlistRepository;
 
-    public WishlistController(WishlistRepository wp) {
+    public WishlistController(WishlistRepository w) {
 
-        wishlistRepository = wp;
-
+        wishlistRepository = w;
     }
 
     @GetMapping("/")
-    public String showIndex(Model model) {
-        model.addAttribute("wishAll", wishlistRepository.getAll());
+    public String showIndex() {
+
 
         return "showIndex";
 
@@ -32,15 +31,15 @@ public class WishlistController {
     }
 
     @GetMapping("/createWishlist")
-        public String showCreateWishlist () {
-
-
+        public String showCreateWishlist (Model model) {
+        model.addAttribute("wishAll", wishlistRepository.getAll());
             return "createWishlist";
 
         }
 
         @PostMapping("/createWishlist")
         public String createWishlist (@RequestParam("wishDecription") String wishDecription) {
+
             System.out.println(wishDecription);
             WishData newWishData = new WishData();
             newWishData.setWishDescription(wishDecription);
@@ -68,7 +67,7 @@ public class WishlistController {
 
         }
 
-        @GetMapping ("/delete{wishNumber}")
+        @GetMapping ("/deleteWish{wishNumber}")
         public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
 
         wishlistRepository.deleteWishDataByNumber(deleteWishNumber);

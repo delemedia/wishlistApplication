@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Create wishlist:</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+    <title>Create wishlist:</title>
 </head>
+
+<header>
+    <div class="HeaderContainer">
+
+        <div class="TopHeaderSplashIMG">
+            <div class="splashText">Wishlist (nr)</div>
+        </div>
+
+    </div>
+</header>
+
 <body>
 <h1>Welcome to Create wishlist:</h1>
 
-<a th:href="@{/showListPage.html}" href="showListPage.html">Tilbage til dine lister:</a>
+<div th:each="w : ${wishAll}">
+
+    <span th:text="${w.getWishlistNumber()}"></span>
+    <span th:text="${w.getWishDescription()}"></span>
+    <span><a th:href="@{'/updateWish/' + ${w.getWishlistNumber()}}">Change</a></span>
+    <span><a th:href="@{'/deleteWish/' + ${w.getWishlistNumber()}}">Remove</a></span>
+
+</div>
+
+
+<a th:href="@{/showListPage}" href="showListPage.html">Tilbage til dine lister:</a>
+
 </body>
+
 </html>

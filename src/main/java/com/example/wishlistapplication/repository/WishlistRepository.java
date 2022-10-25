@@ -25,6 +25,7 @@ public List<WishData> getAll() {
 
         while(resultSet.next()) {
 
+
             int wishNumber = resultSet.getInt("wishNumber");
             String wishDescription = resultSet.getString("wishDescription");
 
