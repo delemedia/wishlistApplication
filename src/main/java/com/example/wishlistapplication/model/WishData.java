@@ -19,12 +19,12 @@ public class WishData {
     }
 
 
-    public int getWishlistNumber() {
+    public int getWishNumber() {
         return wishNumber;
     }
 
-    public void setWishlistNumber(int wishlistNumber) {
-        this.wishNumber = wishlistNumber;
+    public void setWishNumber(int wishNumber) {
+        this.wishNumber = wishNumber;
     }
 
     public String getWishDescription() {

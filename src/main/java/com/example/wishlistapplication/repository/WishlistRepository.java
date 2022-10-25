@@ -71,7 +71,7 @@ public void addWishData(WishData newWishlistData) {
 public WishData findWishDataByNumber(int wishlistNumber) {
 
     WishData wishDataObject = new WishData();
-    wishDataObject.setWishlistNumber(wishlistNumber);
+    wishDataObject.setWishNumber(wishlistNumber);
 
     try {
 
@@ -110,7 +110,7 @@ public void updateWishData(WishData wishData) {
                 PreparedStatement psts = conn.prepareStatement(queryCreate);
 
                 psts.setString(1, wishData.getWishDescription());
-                psts.setInt(2, wishData.getWishlistNumber());
+                psts.setInt(2, wishData.getWishNumber());
 
                 psts.executeUpdate();
 

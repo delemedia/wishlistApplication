@@ -30,19 +30,19 @@ public class WishlistController {
         return "showListPage";
     }
 
-    @GetMapping("/createWishlist")
+    @GetMapping("/showWishesPage")
         public String showCreateWishlist (Model model) {
         model.addAttribute("wishAll", wishlistRepository.getAll());
-            return "createWishlist";
+            return "showWishesPage";
 
         }
 
-        @PostMapping("/createWishlist")
-        public String createWishlist (@RequestParam("wishDecription") String wishDecription) {
+        @PostMapping("/showWishesPage")
+        public String createWishlist (@RequestParam("wishDescription") String wishDescription) {
 
-            System.out.println(wishDecription);
+            System.out.println(wishDescription);
             WishData newWishData = new WishData();
-            newWishData.setWishDescription(wishDecription);
+            newWishData.setWishDescription(wishDescription);
             System.out.println(newWishData);
 
             wishlistRepository.addWishData(newWishData);

@@ -20,12 +20,14 @@
 <body>
 <h1>Welcome to Create wishlist:</h1>
 
+<a th:href="@{/create}" href="create.html">Create a wish</a>
+
 <div th:each="w : ${wishAll}">
 
-    <span th:text="${w.getWishlistNumber()}"></span>
+    <span th:text="${w.getWishNumber()}"></span>
     <span th:text="${w.getWishDescription()}"></span>
-    <span><a th:href="@{'/updateWish/' + ${w.getWishlistNumber()}}">Change</a></span>
-    <span><a th:href="@{'/deleteWish/' + ${w.getWishlistNumber()}}">Remove</a></span>
+    <span><a th:href="@{'/updateWish/' + ${w.getWishNumber()}}">Change</a></span>
+    <span><a th:href="@{'/deleteWish/' + ${w.getWishNumber()}}">Remove</a></span>
 
 </div>
 
