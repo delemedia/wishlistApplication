@@ -52,7 +52,7 @@ public void addWishData(WishData newWishlistData) {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "kea2022");
-        String queryCreate = "INSERT INTO wishlistUser (wishDescription) VALUES (?)";
+        String queryCreate = "INSERT INTO Wishes (wishDescription) VALUES (?)";
         PreparedStatement psts = conn.prepareStatement(queryCreate);
 
         psts.setString(1, newWishlistData.getWishDescription());
