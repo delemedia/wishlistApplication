@@ -18,11 +18,10 @@ public class WishlistController {
 
     @GetMapping("/")
     public String showIndex() {
-
-
         return "showIndex";
-
     }
+
+
 
     @GetMapping("/showListPage")
     public String showListPage () {
