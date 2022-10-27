@@ -13,9 +13,9 @@ public class UserRepository {
 
     List<User> listOfUsers = new LinkedList<>();
     UserDatabaseServices userDatabaseServices = new UserDatabaseServices();
+    Connection dbConnect;
 
     public List<User> getAllUsers() {
-
         try {
             userDatabaseServices.dbConnection();
             userDatabaseServices.preparedStatementGetAllUsers();
@@ -46,7 +46,7 @@ public class UserRepository {
         try {
             userDatabaseServices.dbConnection();
             String queryUpdateUser = "UPDATE user" + "SET Email=? WHERE Id=?";
-            PreparedStatement pstsUpdateUser = dbConnection.prepareStatement(queryUpdateUser);
+            PreparedStatement pstsUpdateUser = dbConnect.prepareStatement(queryUpdateUser);
             pstsUpdateUser.setString(Integer.parseInt("Email"), user.getEmail()); // Check!! parameterindex!!
             pstsUpdateUser.setInt(Integer.parseInt("Id"), user.getId()); // Check!! parameterindex!!
             pstsUpdateUser.executeUpdate();
@@ -65,7 +65,7 @@ public class UserRepository {
         try {
             userDatabaseServices.dbConnection();
             String queryfindUserById = "SELECT * FROM Users WHERE=?";
-            PreparedStatement pstsfindUserById = dbConnection.prepareStatement(queryfindUserById);
+            PreparedStatement pstsfindUserById = dbConnect.prepareStatement(queryfindUserById);
             pstsfindUserById.setInt(1, userID);
             ResultSet usersResSet = pstsfindUserById.executeQuery();
 
@@ -84,7 +84,7 @@ public class UserRepository {
     public void deleteUserById(int userId) {
 
         try {
-            userDatabaseServices.dbConnection(dbConnect);
+            userDatabaseServices.dbConnection();
             String queryDeleteUser = "DELETE FROM users WHERE Id=?";
             PreparedStatement pstsDeleteUser = dbConnect.prepareStatement(queryDeleteUser);
             pstsDeleteUser.setInt(1, userId);

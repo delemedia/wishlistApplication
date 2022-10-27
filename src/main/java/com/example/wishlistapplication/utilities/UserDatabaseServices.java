@@ -8,12 +8,16 @@ import java.util.List;
 
 public class UserDatabaseServices {
 
+    Connection dbConnect;
 
-    public Connection dbConnection(Connection dbConnect) throws SQLException {
-        return dbConnect= DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                "root",
-                "Sy@hy8Qbfpc8ZY8"
-        );
+    public Connection dbConnection() throws SQLException {
+        if (dbConnect == null) {
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
+                    "root",
+                    "Sy@hy8Qbfpc8ZY8"
+            );
+        }
+        return dbConnect;
     }
 
     public void dbConnectionError (SQLException dbConnectError){
@@ -22,8 +26,9 @@ public class UserDatabaseServices {
     }
 
     public List<User> preparedStatementGetAllUsers() throws SQLException {
+        Connection connection = dbConnection();
         List<User> listOfAllUsers = new LinkedList<>();
-        PreparedStatement pstsGetAllUsers = dbConnect.prepareStatement("SELECT * FROM Users");
+        PreparedStatement pstsGetAllUsers = connection.prepareStatement("SELECT * FROM Users");
         ResultSet resultSet = pstsGetAllUsers.executeQuery();
         while(resultSet.next()) {
             int userId = resultSet.getInt("Id");
