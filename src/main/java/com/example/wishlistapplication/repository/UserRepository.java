@@ -1,5 +1,7 @@
-package com.example.user;
+package com.example.wishlistapplication.repository;
 
+import com.example.wishlistapplication.model.User;
+import com.example.wishlistapplication.utilities.UserDatabaseServices;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -8,16 +10,15 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
-    private Connection dbConnect;
-    private SQLException dbConnectError;
-    static List<User> listOfUsers = new LinkedList<>();
+
+    List<User> listOfUsers = new LinkedList<>();
     UserDatabaseServices userDatabaseServices = new UserDatabaseServices();
 
     public List<User> getAllUsers() {
 
         try {
-            userDatabaseServices.dbConnection(dbConnect);
-            userDatabaseServices.preparedStatementGetAllUsers(); //static list, will it work??
+            userDatabaseServices.dbConnection();
+            userDatabaseServices.preparedStatementGetAllUsers();
         }
         catch (SQLException dbConnectError) {
             userDatabaseServices.dbConnectionError(dbConnectError);
@@ -29,7 +30,7 @@ public class UserRepository {
 
         try
         {
-            userDatabaseServices.dbConnection(dbConnect);
+            userDatabaseServices.dbConnection();
             String queryAddUser = "INSERT INTO Users (Email) VALUES (?)";
             PreparedStatement pstsAddUser = dbConnect.prepareStatement(queryAddUser);
             pstsAddUser.setString(Integer.parseInt("Id"), newUser.getEmail()); // Check!! parameterindex!!
@@ -43,9 +44,9 @@ public class UserRepository {
     public void updateUser(User user) {
 
         try {
-            userDatabaseServices.dbConnection(dbConnect);
+            userDatabaseServices.dbConnection();
             String queryUpdateUser = "UPDATE user" + "SET Email=? WHERE Id=?";
-            PreparedStatement pstsUpdateUser = dbConnect.prepareStatement(queryUpdateUser);
+            PreparedStatement pstsUpdateUser = dbConnection.prepareStatement(queryUpdateUser);
             pstsUpdateUser.setString(Integer.parseInt("Email"), user.getEmail()); // Check!! parameterindex!!
             pstsUpdateUser.setInt(Integer.parseInt("Id"), user.getId()); // Check!! parameterindex!!
             pstsUpdateUser.executeUpdate();
@@ -62,9 +63,9 @@ public class UserRepository {
         userObject.setId(userID);
 
         try {
-            userDatabaseServices.dbConnection(dbConnect);
+            userDatabaseServices.dbConnection();
             String queryfindUserById = "SELECT * FROM Users WHERE=?";
-            PreparedStatement pstsfindUserById = dbConnect.prepareStatement(queryfindUserById);
+            PreparedStatement pstsfindUserById = dbConnection.prepareStatement(queryfindUserById);
             pstsfindUserById.setInt(1, userID);
             ResultSet usersResSet = pstsfindUserById.executeQuery();
 

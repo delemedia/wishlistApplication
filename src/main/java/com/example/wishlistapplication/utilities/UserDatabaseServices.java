@@ -1,13 +1,16 @@
-package com.example.user;
+package com.example.wishlistapplication.utilities;
+
+import com.example.wishlistapplication.model.User;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UserDatabaseServices {
-    public static Connection dbConnect;
 
 
-    public void dbConnection(Connection dbConnect) throws SQLException {
-        dbConnect = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
+    public Connection dbConnection(Connection dbConnect) throws SQLException {
+        return dbConnect= DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "Sy@hy8Qbfpc8ZY8"
         );
@@ -18,14 +21,16 @@ public class UserDatabaseServices {
         dbConnectError.printStackTrace();
     }
 
-    public void preparedStatementGetAllUsers() throws SQLException {
+    public List<User> preparedStatementGetAllUsers() throws SQLException {
+        List<User> listOfAllUsers = new LinkedList<>();
         PreparedStatement pstsGetAllUsers = dbConnect.prepareStatement("SELECT * FROM Users");
         ResultSet resultSet = pstsGetAllUsers.executeQuery();
         while(resultSet.next()) {
             int userId = resultSet.getInt("Id");
             String userEmail = resultSet.getString("Email");
-            UserRepository.listOfUsers.add(new User(userId, userEmail));
+            listOfAllUsers.add(new User(userId, userEmail));
         }
+        return listOfAllUsers;
     }
 
 
