@@ -20,19 +20,50 @@
 <body>
 <h1>Welcome to Create wishlist:</h1>
 
-<a th:href="@{/create}" href="create.html">Create a wish</a>
+<br>
+
+<div class="wishlistButtons_Container">
+
+    <div class="wishlistButtons_ContainerStyle" style="width:100%">
+
+
+        <a th:href="@{/createWish}" href="createWish.html">Add a wish</a>
+
+        <!--
+        <a th:href="@{'/updateWish/'}" href="createWish.html">Change wish</a>
+        <a th:href="@{'/deleteWish/'}" href="createWish.html">Remove wish</a>
+        -->
+
+        <a th:href="@{/createWish}" href="createWish.html">Share the list</a>
+
+        <a th:href="@{/showListPage}" href="showListPage.html">Back to categories</a>
+
+    </div>
+
+</div>
+
+    <br>
+
+<table class="wishlistTable" style="width:100%">
 
 <div th:each="w : ${wishAll}">
 
-    <span th:text="${w.getWishNumber()}"></span>
-    <span th:text="${w.getWishDescription()}"></span>
-    <span><a th:href="@{'/updateWish/' + ${w.getWishNumber()}}">Change</a></span>
-    <span><a th:href="@{'/deleteWish/' + ${w.getWishNumber()}}">Remove</a></span>
+    <tr>
+        <th><span></span></th>
+      <!--  <th><span th:text="${w.getWishNumber()}"></span></th> -->
+        <td><span th:text="${w.getWishDescription()}"></span></td>
+
+        <th><span><a th:href="@{'/updateWishData/' + ${w.getWishNumber()}}">Change</a></span></th>
+        <th><span><a th:href="@{'/deleteWishData/' + ${w.getWishNumber()}}">Remove</a></span></th>
+    </tr>
+
+</div>
+
+</table>
 
 </div>
 
 
-<a th:href="@{/showListPage}" href="showListPage.html">Tilbage til dine lister:</a>
 
 </body>
 

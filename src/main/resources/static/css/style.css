@@ -37,3 +37,31 @@
 
 }
 
+.wishlistTable {
+    border-top: dotted lightgrey 2px;
+    border-bottom: dotted lightgrey 2px;
+    padding: 20px;
+}
+
+.wishlistButtons_Container {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.wishlistButtons_ContainerStyle {
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 30px;
+    border-top: dotted lightgrey 2px;
+    border-bottom: dotted lightgrey 2px;
+
+}
+
+
+
+
+

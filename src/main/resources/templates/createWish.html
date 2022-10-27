@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+    <title>Add a wish</title>
+</head>
+
+
+<body>
+<h1>Add a wish</h1>
+
+<br>
+<a th:href="@{/showWishesPage}" href="showWishesPage.html">Back to wishes</a>
+<br> <br>
+
+<form action="/createWish" method="post">
+
+    <label for="name-field">Your wish:</label>
+    <input id="name-field" name="wishDescription" placeholder="Enter your wish...">
+
+    <button type="submit">Add your wish</button>
+
+</form>
+
+</body>
+</html>

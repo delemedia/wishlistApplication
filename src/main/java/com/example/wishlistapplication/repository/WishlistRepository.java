@@ -52,7 +52,7 @@ public void addWishData(WishData newWishlistData) {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "kea2022");
-        String queryCreate = "INSERT INTO wishlistUser (wishDescription) VALUES (?)";
+        String queryCreate = "INSERT INTO wishes (wishDescription) VALUES (?)";
         PreparedStatement psts = conn.prepareStatement(queryCreate);
 
         psts.setString(1, newWishlistData.getWishDescription());
@@ -68,27 +68,27 @@ public void addWishData(WishData newWishlistData) {
 
 }
 
-public WishData findWishDataByNumber(int wishlistNumber) {
+public WishData findWishDataByNumber(int wishNumber) {
 
-    WishData wishDataObject = new WishData();
-    wishDataObject.setWishNumber(wishlistNumber);
+    WishData wishes = new WishData();
+    wishes.setWishNumber(wishNumber);
 
     try {
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "kea2022");
-        String queryCreate = "SELECT * FROM wishlistUser WHERE=?";
+        String queryCreate = "SELECT * FROM wishes WHERE wishNumber=?";
         PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-        psts.setInt(1, wishlistNumber);
+        psts.setInt(1, wishNumber);
 
         ResultSet rs = psts.executeQuery();
 
         rs.next();
         String wishDescription = rs.getString(2);
-        wishDataObject.setWishDescription(wishDescription);
-        System.out.println(wishDataObject);
+        wishes.setWishDescription(wishDescription);
+        System.out.println(wishes);
 
     } catch (SQLException e)
     {
@@ -96,21 +96,22 @@ public WishData findWishDataByNumber(int wishlistNumber) {
         e.printStackTrace();
     }
 
-    return wishDataObject;
+    return wishes;
 
 }
 
-public void updateWishData(WishData wishData) {
+public void updateWishData(WishData wishes) {
 
     try {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "kea2022");
-                String queryCreate = "UPDATE wishData" + "SET wishDescription=? WHERE wishNumber=?";
+                String queryCreate = "UPDATE wishes SET wishDescription=? WHERE wishNumber=?";
                 PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-                psts.setString(1, wishData.getWishDescription());
-                psts.setInt(2, wishData.getWishNumber());
+
+                psts.setString(1, wishes.getWishDescription());
+                psts.setInt(2, wishes.getWishNumber());
 
                 psts.executeUpdate();
 
@@ -130,10 +131,12 @@ public void deleteWishDataByNumber(int deleteWishNumber) {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                 "root",
                 "kea2022");
-        String queryCreate = "DELETE FROM wishData WHERE wishNumber=?";
+        String queryCreate = "DELETE FROM wishes WHERE wishNumber=?";
         PreparedStatement psts = conn.prepareStatement(queryCreate);
 
         psts.setInt(1, deleteWishNumber);
+
+        psts.executeUpdate();
 
     } catch (SQLException e)
     {

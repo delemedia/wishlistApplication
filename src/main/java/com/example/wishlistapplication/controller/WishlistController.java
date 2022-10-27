@@ -37,44 +37,61 @@ public class WishlistController {
 
         }
 
-        @PostMapping("/showWishesPage")
-        public String createWishlist (@RequestParam("wishDescription") String wishDescription) {
+    // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-            System.out.println(wishDescription);
-            WishData newWishData = new WishData();
-            newWishData.setWishDescription(wishDescription);
-            System.out.println(newWishData);
 
-            wishlistRepository.addWishData(newWishData);
-            return "redirect:/";
-        }
+    @GetMapping("/createWish")
+    public String showCreateWish () {
 
-        @GetMapping("updateWish{wishNumber}")
-        public String showUpdateWishData(@PathVariable("wishNumber") int deleteWishNumber, Model model) {
+        return "createWish";
+    }
 
-        model.addAttribute("wishDataObject", wishlistRepository.findWishDataByNumber(deleteWishNumber));
+    @PostMapping("/createWish")
+    public String showCreateWish (@RequestParam("wishDescription") String wishDescription) {
 
-        return "update";
+        System.out.println(wishDescription);
+        WishData newWishData = new WishData();
+        newWishData.setWishDescription(wishDescription);
+        System.out.println(newWishData);
 
-        }
+        wishlistRepository.addWishData(newWishData);
+        return "redirect:/showWishesPage";
+    }
 
-        @PostMapping("/updateWish")
-        public String updateWishData(@ModelAttribute WishData wishData) {
 
-        wishlistRepository.updateWishData(wishData);
+    // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+   // ------------------------------------------------------------------------
 
-        return "redirect:/";
+    @GetMapping("/updateWishData/{wishNumber}")
+    public String showUpdateWishData(@PathVariable("wishNumber") int deleteWishNumber, Model model) {
 
-        }
+        model.addAttribute("wishes", wishlistRepository.findWishDataByNumber(deleteWishNumber));
 
-        @GetMapping ("/deleteWish{wishNumber}")
-        public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
+        return "updateWishData";
+
+    }
+
+    @PostMapping("/updateWishData/")
+    public String showUpdateWishData(@ModelAttribute WishData wishes) {
+
+        wishlistRepository.updateWishData(wishes);
+
+        return "redirect:/showWishesPage";
+
+    }
+
+    @GetMapping ("/deleteWishData/{wishNumber}")
+    public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
 
         wishlistRepository.deleteWishDataByNumber(deleteWishNumber);
 
-        return "redirect:/";
+        return "redirect:/showWishesPage";
 
-        }
+    }
+
 
     }
 
