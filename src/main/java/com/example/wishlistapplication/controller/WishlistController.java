@@ -21,8 +21,6 @@ public class WishlistController {
         return "showIndex";
     }
 
-
-
     @GetMapping("/showListPage")
     public String showListPage () {
 

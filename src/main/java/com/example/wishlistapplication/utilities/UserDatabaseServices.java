@@ -1,6 +1,7 @@
 package com.example.wishlistapplication.utilities;
 
 import com.example.wishlistapplication.model.User;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -10,8 +11,18 @@ public class UserDatabaseServices {
 
     Connection dbConnect;
 
+    @Value("${spring.datasource.url}")
+    private String wishlishdb_url;
+
+    @Value("${spring.datasource.username}")
+    private String userName;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
     public Connection dbConnection() throws SQLException {
         if (dbConnect == null) {
+            //dbConnect = DriverManager.getConnection("wishlishdb_url, userName, password");
             dbConnect = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
                     "Sy@hy8Qbfpc8ZY8"
@@ -32,8 +43,9 @@ public class UserDatabaseServices {
         ResultSet resultSet = pstsGetAllUsers.executeQuery();
         while(resultSet.next()) {
             int userId = resultSet.getInt("Id");
+            String userName = resultSet.getString("Name");
             String userEmail = resultSet.getString("Email");
-            listOfAllUsers.add(new User(userId, userEmail));
+            listOfAllUsers.add(new User(userId, userName, userEmail));
         }
         return listOfAllUsers;
     }

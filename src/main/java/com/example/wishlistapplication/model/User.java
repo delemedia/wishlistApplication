@@ -4,14 +4,13 @@ import javax.persistence.*;
 
 
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
-    @Column(nullable = false, unique = true)
+    private String name;
     private String email;
 
     public User(){}
-    public User(int userId, String userEmail) {
+    public User(int userId, String userName, String userEmail) {
     }
 
     public int getId() {
@@ -20,6 +19,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
