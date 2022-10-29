@@ -2,11 +2,8 @@ package com.example.wishlistapplication.controller;
 
 import com.example.wishlistapplication.model.CategoriData;
 import com.example.wishlistapplication.model.WishData;
-import com.example.wishlistapplication.model.WishData2;
 import com.example.wishlistapplication.repository.CategoriRepository;
 import com.example.wishlistapplication.repository.WishlistRepository;
-import com.example.wishlistapplication.repository.WishlistRepository;
-import com.example.wishlistapplication.repository.WishlistRepository2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +13,17 @@ public class WishlistController {
 
     WishlistRepository wishlistRepository;
 
-    WishlistRepository2 wishlistRepository2;
+   // WishlistRepository2 wishlistRepository2;
     CategoriRepository categoriRepository;
 
     public WishlistController(WishlistRepository w, WishlistRepository2 w2, CategoriRepository c) {
 
         wishlistRepository = w;
 
-        wishlistRepository2 = w2;
+      //  wishlistRepository2 = w2;
 
         categoriRepository = c;
     }
-
 
 
     @GetMapping("/")
@@ -44,14 +40,14 @@ public class WishlistController {
 
 
     @GetMapping("/showListPage")
-    public String showListPage (Model model) {
+    public String showListPage(Model model) {
         model.addAttribute("listAll", categoriRepository.getAll());
 
         return "showListPage";
     }
 
     @GetMapping("/createCategori")
-    public String showCreateCategori () {
+    public String showCreateCategori() {
 
         return "createCategori";
     }
@@ -88,7 +84,7 @@ public class WishlistController {
 
     }
 
-    @GetMapping ("/deleteCategoriData/{listNumber}")
+    @GetMapping("/deleteCategoriData/{listNumber}")
     public String deleteCategoriData(@PathVariable("listNumber") int deleteListNumber) {
 
         categoriRepository.deleteCategoriDataByNumber(deleteListNumber);
@@ -98,12 +94,6 @@ public class WishlistController {
     }
 
 
-
-
-
-
-
-
     // showWishesPage - Controller Content.
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
@@ -111,21 +101,21 @@ public class WishlistController {
 
 
     @GetMapping("/showWishesPage")
-        public String showCreateWishes (Model model) {
+    public String showCreateWishes(Model model) {
         model.addAttribute("wishAll", wishlistRepository.getAll());
-            return "showWishesPage";
+        return "showWishesPage";
 
-        }
+    }
 
 
     @GetMapping("/createWish")
-    public String showCreateWishes () {
+    public String showCreateWishes() {
 
         return "createWish";
     }
 
     @PostMapping("/createWish")
-    public String showCreateWishes (@RequestParam("wishDescription") String wishDescription) {
+    public String showCreateWishes(@RequestParam("wishDescription") String wishDescription) {
 
         System.out.println(wishDescription);
         WishData newWishData = new WishData();
@@ -155,7 +145,7 @@ public class WishlistController {
 
     }
 
-    @GetMapping ("/deleteWishData/{wishNumber}")
+    @GetMapping("/deleteWishData/{wishNumber}")
     public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
 
         wishlistRepository.deleteWishDataByNumber(deleteWishNumber);
@@ -164,17 +154,18 @@ public class WishlistController {
 
     }
 
+}
 
 
-
-
+    // Den ekstra kode del jeg forholdte mig til
+    // Har udkommenteret koden, for at det ikke forstyrre, de andre kode elementer.
 
     // showWishesPage2 - Controller Content.
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
 
-
+/*
     @GetMapping("/showWishesPage2")
     public String showCreateWishes2 (Model model) {
         model.addAttribute("wishAll2", wishlistRepository2.getAll2());
@@ -229,6 +220,6 @@ public class WishlistController {
 
     }
 
-    }
 
+*/
 
