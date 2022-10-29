@@ -41,6 +41,7 @@
     border-top: dotted lightgrey 2px;
     border-bottom: dotted lightgrey 2px;
     padding: 20px;
+    height: 10px;
 }
 
 .wishlistButtons_Container {
@@ -60,6 +61,77 @@
     border-bottom: dotted lightgrey 2px;
 
 }
+
+
+
+.categoriListTable {
+    border-top: dotted lightgrey 2px;
+    border-bottom: dotted lightgrey 2px;
+    padding: 20px;
+}
+
+.categoriListButtons_Container {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.categoriListButtons_ContainerStyle {
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 30px;
+    border-top: dotted lightgrey 2px;
+    border-bottom: dotted lightgrey 2px;
+
+}
+
+.Button_Effect {
+
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 5px;
+    border-radius: 10%;
+
+}
+
+.Button_Effect:hover {
+
+  opacity: 70%;
+    color: black;
+
+}
+
+
+.Button_Effect_Delete {
+
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 10%;
+
+
+}
+
+.Button_Effect_Delete:hover {
+
+    opacity: 70%;
+    color: black;
+
+}
+
+
+
+
+
+
+
+
+
 
 
 

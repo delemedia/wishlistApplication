@@ -12,7 +12,7 @@
 <h1>Change a wish</h1>
 
 <br>
-<a th:href="@{/showWishesPage}" href="showWishesPage.html">Back to wishes</a>
+<a th:href="@{/showWishesPage}" href="showWishesPage.html" class="Button_Effect">Back to wishes</a>
 <br> <br>
 
 <form action="/updateWishData/" method="post">
@@ -22,7 +22,7 @@
     <label for="name-field">Your wish: </label>
     <input id="name-field" name="wishDescription" placeholder="Change your wish..." th:value="${wishes.wishDescription}">
 
-    <button type="submit">Change wish</button>
+    <button type="submit" class="Button_Effect">Change wish</button>
 
 </form>
 

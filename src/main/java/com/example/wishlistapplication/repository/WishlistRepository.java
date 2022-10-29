@@ -147,4 +147,5 @@ public void deleteWishDataByNumber(int deleteWishNumber) {
 }
 
 
+
 }

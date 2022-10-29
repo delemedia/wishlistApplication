@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+  <title>Change a wish</title>
+</head>
+
+<body>
+
+<h1>Change a Categori</h1>
+
+<br>
+<a th:href="@{/showListPage}" href="showListPage.html" class="Button_Effect">Back to categori list</a>
+<br> <br>
+
+<form action="/updateCategoriData/" method="post">
+
+  <input type="hidden" name="listNumber" th:value="${categories.listNumber}">
+
+  <label for="name-field">Your categori: </label>
+  <input id="name-field" name="categoriDescription" placeholder="Change your categori..." th:value="${categories.categoriDescription}">
+
+  <button type="submit" class="Button_Effect">Change categori</button>
+
+</form>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
     <div class="wishlistButtons_ContainerStyle" style="width:100%">
 
 
-        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Add a wish</a>
+        <a th:href="@{/createWish2}" href="createWish2.html" class="Button_Effect">Add a wish</a>
 
         <!--
         <a th:href="@{'/updateWish/'}" href="createWish.html">Change wish</a>
@@ -42,22 +42,22 @@
 
 </div>
 
-    <br>
+<br>
 
 <table class="wishlistTable" style="width:100%">
 
-<div th:each="w : ${wishAll}">
+    <div th:each="w2 : ${wishAll2}">
 
-    <tr>
-        <th><span></span></th>
-        <!--  <th><span th:text="${w.getWishNumber()}"></span></th> -->
-        <td><span th:text="${w.getWishDescription()}"></span></td>
+        <tr>
+            <th><span></span></th>
+            <!--  <th><span th:text="${w.getWishNumber2()}"></span></th> -->
+            <td><span th:text="${w2.getWishDescription2()}"></span></td>
 
-        <th><span><a th:href="@{'/updateWishData/' + ${w.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
-        <th><span><a th:href="@{'/deleteWishData/' + ${w.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
-    </tr>
+            <th><span><a th:href="@{'/updateWishData2/' + ${w2.getWishNumber2()}}" class="Button_Effect">Change</a></span></th>
+            <th><span><a th:href="@{'/deleteWishData2/' + ${w2.getWishNumber2()}}" class="Button_Effect_Delete">Remove</a></span></th>
+        </tr>
 
-</div>
+    </div>
 
 </table>
 

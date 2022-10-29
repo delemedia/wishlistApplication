@@ -2,13 +2,14 @@ package com.example.wishlistapplication.model;
 
 public class WishData {
 
+
     private int wishNumber;
 
     private String wishDescription;
 
 
 
-    public WishData(int wishNumber, String wishDescription) {
+    public WishData( int wishNumber, String wishDescription) {
         this.wishNumber = wishNumber;
         this.wishDescription = wishDescription;
     }
@@ -34,6 +35,8 @@ public class WishData {
     public void setWishDescription(String wishDescription) {
         this.wishDescription = wishDescription;
     }
+
+
 
     @Override
     public String toString() {
