@@ -7,35 +7,36 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserDatabaseServices {
+public class DatabaseServices {
 
     Connection dbConnect;
 
+    // Database username & password proxy values
     @Value("${spring.datasource.url}")
-    private String wishlishdb_url;
+    private String wishlistdb_url;
 
     @Value("${spring.datasource.username}")
-    private String userName;
+    private String wishlistdbAdmin_userName;
 
     @Value("${spring.datasource.password}")
-    private String password;
+    private String wishlistdbAdmin_password;
 
+    //DB Connection Method
     public Connection dbConnection() throws SQLException {
         if (dbConnect == null) {
-            //dbConnect = DriverManager.getConnection("wishlishdb_url, userName, password");
-            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "Sy@hy8Qbfpc8ZY8"
-            );
+            dbConnect = DriverManager.getConnection(wishlistdb_url, wishlistdbAdmin_userName, wishlistdbAdmin_password);
         }
         return dbConnect;
     }
 
+    //DB Connection Error Method
     public void dbConnectionError (SQLException dbConnectError){
         System.out.println("Cannot connect to database.");
         dbConnectError.printStackTrace();
     }
 
+
+// UserRepository preparedStatement (Exercise)
     public List<User> preparedStatementGetAllUsers() throws SQLException {
         Connection connection = dbConnection();
         List<User> listOfAllUsers = new LinkedList<>();
@@ -49,6 +50,5 @@ public class UserDatabaseServices {
         }
         return listOfAllUsers;
     }
-
 
 }

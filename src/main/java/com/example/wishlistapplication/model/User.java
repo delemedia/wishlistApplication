@@ -1,7 +1,5 @@
 package com.example.wishlistapplication.model;
 
-import javax.persistence.*;
-
 
 public class User {
 
