@@ -52,6 +52,7 @@ public void addWish(Wish newWish) {
 
     }
 
+
 public Wish findWishByNumber(int wishNumber) {
 
     Wish wishes = new Wish();
