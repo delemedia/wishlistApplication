@@ -11,18 +11,34 @@
 <body>
 <h1>Add a wish</h1>
 
-<br>
-<a th:href="@{/showWiseshPage}" href="showWishesPage.html" class="Button_Effect">Back to wishes</a>
-<br> <br>
 
+<div class="ring_boxWish">
 <form action="/createWish" method="post">
 
-    <label for="name-field">Your wish:</label>
+   <!-- <label for="name-field">Your wish:</label><br> -->
     <input id="name-field" name="wishDescription" placeholder="Enter your wish...">
-
-    <button type="submit" class="Button_Effect">Add your wish</button>
+    <br> <br>
+    <button type="submit" class="Button_Effect">Add your wish</button> <a th:href="@{/showWiseshPage}" href="showWishesPage.html" class="Button_Effect">Back to wishes</a>
 
 </form>
+</div>
 
 </body>
+
+
+<footer>
+
+
+    <div class="smoke_boxMiddle">
+        <!--   <img class="" th:src="@{img/smoke.webp}" src="../static/img/smoke.webp" alt="Genie smoke!">
+       <img th:src="@{img/smoke.webp}" src="../static/img/smoke-effect-png.webp" alt="Genie smoke!">  -->
+
+        <img class="" th:src="@{img/smoke-effect-png.webp}" src="../static/img/smoke-effect-png.webp" alt="Genie smoke!">
+
+    </div>
+
+
+</footer>
+
+
 </html>

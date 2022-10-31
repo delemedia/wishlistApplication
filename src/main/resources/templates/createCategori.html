@@ -11,18 +11,37 @@
 <body>
 <h1>Add a Categori list:</h1>
 
-<br>
-<a th:href="@{/showListPage}" href="showListPage.html" class="Button_Effect">Back to Categori List page</a>
-<br> <br>
 
+<div class="ring_boxCategori">
 <form action="/createCategori" method="post">
 
-  <label for="name-field">Your Categori:</label>
-  <input id="name-field" name="categoriDescription" placeholder="Enter your Categori...">
+ <!-- <label for="name-field">Your Categori:</label> -->
+  <input id="name-field" name="categoriDescription" placeholder="Enter your Categori..."> <br><br>
+    <button type="submit" class="Button_Effect">Create Categori</button> <a th:href="@{/showListPage}" href="showListPage.html" class="Button_Effect">Back to Categori List page</a>
 
-  <button type="submit" class="Button_Effect">Create Categori</button>
 
 </form>
 
+</div>
+
+
+
+
 </body>
+
+
+<footer>
+
+
+  <div class="smoke_boxMiddle">
+    <!--   <img class="" th:src="@{img/smoke.webp}" src="../static/img/smoke.webp" alt="Genie smoke!">
+   <img th:src="@{img/smoke.webp}" src="../static/img/smoke-effect-png.webp" alt="Genie smoke!">  -->
+
+    <img class="" th:src="@{img/smoke-effect-png.webp}" src="../static/img/smoke-effect-png.webp" alt="Genie smoke!">
+
+  </div>
+
+
+</footer>
+
 </html>

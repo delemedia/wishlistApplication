@@ -16,7 +16,7 @@ public class WishlistController {
    // WishlistRepository2 wishlistRepository2;
     CategoriRepository categoriRepository;
 
-    public WishlistController(WishlistRepository w, WishlistRepository2 w2, CategoriRepository c) {
+    public WishlistController(WishlistRepository w, CategoriRepository c) {
 
         wishlistRepository = w;
 
