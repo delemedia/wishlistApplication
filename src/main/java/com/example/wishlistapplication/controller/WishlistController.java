@@ -16,22 +16,16 @@ public class WishlistController {
     }
 
 
-    @GetMapping("/")
-    public String showIndex() {
-        return "showIndex";
-    }
-
-
     @GetMapping("/showWishListsPage")
     public String showWishListsPage(Model model) {
         model.addAttribute("listAll", wishListRepository.getAllWishLists()); //attribute name??
-        return "showWishListsPage";
+        return "wishlist/showWishListsPage";
     }
 
 
     @GetMapping("/createWishList")
     public String showCreateWishList() {
-        return "createWishList";
+        return "wishlist/createWishList";
     }
 
 
@@ -44,14 +38,14 @@ public class WishlistController {
         System.out.println(newWishList);
 
         wishListRepository.addWishlist(newWishList);
-        return "redirect:/showListPage";
+        return "redirect:wishlist/showWishListsPage";
     }
 
 
     @GetMapping("/updateWishList/{wishListID}")
     public String showUpdateWishList(@PathVariable("wishListID") int deleteWishListID, Model model) {
         model.addAttribute("categories", wishListRepository.findWishlistByID(deleteWishListID));
-        return "updateWishList";
+        return "wishlist/updateWishList";
 
     }
 

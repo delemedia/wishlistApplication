@@ -19,40 +19,17 @@ public class UserController {
 
 
     @GetMapping("/registerPage")
-    public String showRegisterUser() {
-        return "registerPage";
+    public String showRegisterUser(Model model) {
+        model.addAttribute("user", new User());
+        return "user/registerPage";
     }
 
 
-    @PostMapping("/registerPage")
-    public String registerUser(@RequestParam("name") String name, @RequestParam("email") String email) {
-
-        User newUser = new User();
-        newUser.setName(name);
-        newUser.setEmail(email);
-        System.out.println(newUser);
-        //save to repository
-        userRepository.addUser(newUser);
-        return "redirect:/";
+    @PostMapping("/createUser")
+    public String createUser(User user) {
+        userRepository.addUser(user);
+        return "redirect:/login";
     }
 
-
-    @GetMapping("/loginPage")
-    public String showUserLogIn (){
-        return "loginPage";
-    }
-
-
-    @PostMapping("/loginPage")
-    public String registerUser(@RequestParam("id") int id, @RequestParam("email") String email) {
-
-        User existingUser = new User();
-        existingUser.setId(id);
-        existingUser.setEmail(email);
-        System.out.println(existingUser);
-        //login to user's page
-        userRepository.findUserById(id);
-        return "redirect:/showListPage";
-    }
 }
 

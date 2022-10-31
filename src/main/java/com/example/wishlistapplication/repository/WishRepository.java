@@ -13,102 +13,86 @@ public class WishRepository {
 
     List<Wish> listOfAllWishes = new LinkedList<>();
     DatabaseServices databaseServices = new DatabaseServices();
-    Connection dbConnect;
 
-public List<Wish> getAllWishes() {
+    public List<Wish> getAllWishes() {
 
-    try {
-        databaseServices.dbConnection();
-        PreparedStatement psts = dbConnect.prepareStatement("SELECT * FROM wishes");
-        ResultSet resultSet = psts.executeQuery();
+        try {
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM wishes");
+            ResultSet resultSet = psts.executeQuery();
 
-        while(resultSet.next()) {
-            int wishNumber = resultSet.getInt("wishNumber");
-            String wishDescription = resultSet.getString("wishDescription");
+            while (resultSet.next()) {
+                int wishNumber = resultSet.getInt("wishNumber");
+                String wishDescription = resultSet.getString("wishDescription");
 
-            listOfAllWishes.add(new Wish(wishNumber, wishDescription));
+                listOfAllWishes.add(new Wish(wishNumber, wishDescription));
+            }
+
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
-
-    } catch (SQLException dbConnectError) {
-        databaseServices.dbConnectionError(dbConnectError);
-    }
-    return listOfAllWishes;
-}
-
-
-public void addWish(Wish newWish) {
-
-    try
-    {
-        databaseServices.dbConnection();
-        String queryCreate = "INSERT INTO wishes (wishDescription) VALUES (?)";
-        PreparedStatement psts = dbConnect.prepareStatement(queryCreate);
-        psts.setString(1, newWish.getWishDescription());
-        psts.executeUpdate();
-
-    } catch (SQLException dbConnectError) {
-        databaseServices.dbConnectionError(dbConnectError);
-        }
-
+        return listOfAllWishes;
     }
 
 
-public Wish findWishByNumber(int wishNumber) {
+    public void addWish(Wish newWish) {
 
-    Wish wishes = new Wish();
-    wishes.setWishNumber(wishNumber);
+        try {
+            String queryCreate = "INSERT INTO wishes (wishDescription) VALUES (?)";
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+            psts.setString(1, newWish.getWishDescription());
+            psts.executeUpdate();
 
-    try {
-
-        databaseServices.dbConnection();
-        String queryCreate = "SELECT * FROM wishes WHERE wishNumber=?";
-        PreparedStatement psts = dbConnect.prepareStatement(queryCreate);
-        psts.setInt(1, wishNumber);
-        ResultSet rs = psts.executeQuery();
-
-        rs.next();
-        String wishDescription = rs.getString(2);
-        wishes.setWishDescription(wishDescription);
-        System.out.println(wishes);
-
-    } catch (SQLException dbConnectError) {
-        databaseServices.dbConnectionError(dbConnectError);
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
-    return wishes;
     }
 
-public void updateWish(Wish wishes) {
 
-    try {
-        databaseServices.dbConnection();
-                String queryCreate = "UPDATE wishes SET wishDescription=? WHERE wishNumber=?";
-                PreparedStatement psts = dbConnect.prepareStatement(queryCreate);
+    public Wish findWishByNumber(int wishNumber) {
+        Wish wishes = new Wish();
+        wishes.setWishNumber(wishNumber);
 
+        try {
+            String queryCreate = "SELECT * FROM wishes WHERE wishNumber=?";
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+            psts.setInt(1, wishNumber);
+            ResultSet rs = psts.executeQuery();
+            rs.next();
+            String wishDescription = rs.getString(2);
+            wishes.setWishDescription(wishDescription);
+            System.out.println(wishes);
 
-                psts.setString(1, wishes.getWishDescription());
-                psts.setInt(2, wishes.getWishNumber());
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
+        }
+        return wishes;
+    }
 
-                psts.executeUpdate();
+    public void updateWish(Wish wishes) {
 
+        try {
+            String queryCreate = "UPDATE wishes SET wishDescription=? WHERE wishNumber=?";
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+            psts.setString(1, wishes.getWishDescription());
+            psts.setInt(2, wishes.getWishNumber());
+            psts.executeUpdate();
 
-    } catch (SQLException dbConnectError) {
-        databaseServices.dbConnectionError(dbConnectError);
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
 
     }
 
-public void deleteWishById(int deleteWishId) {
+    public void deleteWishById(int deleteWishId) {
 
-    try {
-        databaseServices.dbConnection();
-        String queryCreate = "DELETE FROM wishes WHERE wishNumber=?";
-        PreparedStatement psts = dbConnect.prepareStatement(queryCreate);
+        try {
+            String queryCreate = "DELETE FROM wishes WHERE wishNumber=?";
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+            psts.setInt(1, deleteWishId);
+            psts.executeUpdate();
 
-        psts.setInt(1, deleteWishId);
-        psts.executeUpdate();
-
-    } catch (SQLException dbConnectError) {
-        databaseServices.dbConnectionError(dbConnectError);
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
     }
 
