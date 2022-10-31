@@ -22,7 +22,6 @@ public class WishlistController {
 
     @GetMapping("/")
     public String showIndex() {
-
         return "showIndex";
     }
 
@@ -69,7 +68,6 @@ public class WishlistController {
     public String showUpdateWishList(@ModelAttribute WishList wishLists) {
         wishListRepository.updateWishList(wishLists);
         return "redirect:/showWishListsPage";
-
     }
 
     @GetMapping("/deleteWishList/{wishListID}")
