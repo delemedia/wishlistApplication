@@ -86,7 +86,7 @@ public class WishlistController {
 
     @GetMapping("/showWishesPage")
     public String showCreateWishes(Model model) {
-        model.addAttribute("wishAll", wishRepository.getAll());
+        model.addAttribute("wishAll", wishRepository.getAllWishes());
         return "showWishesPage";
 
     }
@@ -106,7 +106,7 @@ public class WishlistController {
         newWish.setWishDescription(wishDescription);
         System.out.println(newWish);
 
-        wishRepository.addWishData(newWish);
+        wishRepository.addWish(newWish);
         return "redirect:/showWishesPage";
     }
 
@@ -114,7 +114,7 @@ public class WishlistController {
     @GetMapping("/updateWishData/{wishNumber}")
     public String showUpdateWishData(@PathVariable("wishNumber") int deleteWishNumber, Model model) {
 
-        model.addAttribute("wishes", wishRepository.findWishDataByNumber(deleteWishNumber));
+        model.addAttribute("wishes", wishRepository.findWishByNumber(deleteWishNumber));
 
         return "updateWishData";
 
@@ -123,7 +123,7 @@ public class WishlistController {
     @PostMapping("/updateWishData/")
     public String showUpdateWishData(@ModelAttribute Wish wishes) {
 
-        wishRepository.updateWishData(wishes);
+        wishRepository.updateWish(wishes);
 
         return "redirect:/showWishesPage";
 
@@ -132,7 +132,7 @@ public class WishlistController {
     @GetMapping("/deleteWishData/{wishNumber}")
     public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
 
-        wishRepository.deleteWishDataByNumber(deleteWishNumber);
+        wishRepository.deleteWishById(deleteWishNumber);
 
         return "redirect:/showWishesPage";
 
