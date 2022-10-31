@@ -27,7 +27,6 @@ public class UserRepository {
     }
 
     public void addUser(User newUser) {
-
         try
         {
             userDatabaseServices.dbConnection();
