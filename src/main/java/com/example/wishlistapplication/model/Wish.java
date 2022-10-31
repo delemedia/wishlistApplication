@@ -1,6 +1,6 @@
 package com.example.wishlistapplication.model;
 
-public class WishData {
+public class Wish {
 
 
     private int wishNumber;
@@ -9,13 +9,13 @@ public class WishData {
 
 
 
-    public WishData( int wishNumber, String wishDescription) {
+    public Wish(int wishNumber, String wishDescription) {
         this.wishNumber = wishNumber;
         this.wishDescription = wishDescription;
     }
 
 
-    public WishData() {
+    public Wish() {
 
     }
 

@@ -1,9 +1,9 @@
 package com.example.wishlistapplication.controller;
 
-import com.example.wishlistapplication.model.CategoriData;
-import com.example.wishlistapplication.model.WishData;
-import com.example.wishlistapplication.repository.CategoriRepository;
-import com.example.wishlistapplication.repository.WishlistRepository;
+import com.example.wishlistapplication.model.Wish;
+import com.example.wishlistapplication.model.WishList;
+import com.example.wishlistapplication.repository.WishListRepository;
+import com.example.wishlistapplication.repository.WishRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class WishlistController {
 
-    WishlistRepository wishlistRepository;
+    WishRepository wishRepository;
+    WishListRepository wishListRepository;
 
-   // WishlistRepository2 wishlistRepository2;
-    CategoriRepository categoriRepository;
-
-    public WishlistController(WishlistRepository w, WishlistRepository2 w2, CategoriRepository c) {
-
-        wishlistRepository = w;
-
-      //  wishlistRepository2 = w2;
-
-        categoriRepository = c;
+    public WishlistController(WishRepository w, WishListRepository c) {
+        wishRepository = w;
+        wishListRepository = c;
     }
 
 
@@ -33,63 +27,55 @@ public class WishlistController {
     }
 
 
-    // showListPage - Controller Content.
+    // showWishListsPage - Controller Content.
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
 
 
-    @GetMapping("/showListPage")
-    public String showListPage(Model model) {
-        model.addAttribute("listAll", categoriRepository.getAll());
-
-        return "showListPage";
+    @GetMapping("/showWishListsPage")
+    public String showWishListsPage(Model model) {
+        model.addAttribute("listAll", wishListRepository.getAllWishLists()); //attribute name??
+        return "showWishListsPage";
     }
 
-    @GetMapping("/createCategori")
-    public String showCreateCategori() {
-
-        return "createCategori";
+    @GetMapping("/createWishList")
+    public String showCreateWishList() {
+        return "createWishList";
     }
 
 
-    @PostMapping("/createCategori")
-    public String showCreateCategori(@RequestParam("categoriDescription") String categoriDescription) {
+    @PostMapping("/createWishList")
+    public String showCreateWishList(@RequestParam("wishlistName") String wishlistName) {
 
-        System.out.println(categoriDescription);
-        CategoriData newCategoriData = new CategoriData();
-        newCategoriData.setCategoriDescription(categoriDescription);
-        System.out.println(newCategoriData);
+        System.out.println(wishlistName);
+        WishList newWishList = new WishList();
+        newWishList.setWishlistName(wishlistName);
+        System.out.println(newWishList);
 
-        categoriRepository.addCategoriData(newCategoriData);
+        wishListRepository.addWishlist(newWishList);
         return "redirect:/showListPage";
     }
 
 
-    @GetMapping("/updateCategoriData/{listNumber}")
-    public String showUpdateCategoriData(@PathVariable("listNumber") int deleteListNumber, Model model) {
-
-        model.addAttribute("categories", categoriRepository.findCategoriDataByNumber(deleteListNumber));
-
-        return "updateCategoriData";
+    @GetMapping("/updateWishList/{wishListID}")
+    public String showUpdateWishList(@PathVariable("wishListID") int deleteWishListID, Model model) {
+        model.addAttribute("categories", wishListRepository.findWishlistByID(deleteWishListID));
+        return "updateWishList";
 
     }
 
-    @PostMapping("/updateCategoriData/")
-    public String showUpdateCategoriData(@ModelAttribute CategoriData categories) {
-
-        categoriRepository.updateCategoriData(categories);
-
-        return "redirect:/showListPage";
+    @PostMapping("/updateWishList/")
+    public String showUpdateWishList(@ModelAttribute WishList wishLists) {
+        wishListRepository.updateWishList(wishLists);
+        return "redirect:/showWishListsPage";
 
     }
 
-    @GetMapping("/deleteCategoriData/{listNumber}")
-    public String deleteCategoriData(@PathVariable("listNumber") int deleteListNumber) {
-
-        categoriRepository.deleteCategoriDataByNumber(deleteListNumber);
-
-        return "redirect:/showListPage";
+    @GetMapping("/deleteWishList/{wishListID}")
+    public String deleteWishList(@PathVariable("wishListID") int deleteWishListID) {
+        wishListRepository.deleteWishList(deleteWishListID);
+        return "redirect:/showWishListsPage";
 
     }
 
@@ -102,7 +88,7 @@ public class WishlistController {
 
     @GetMapping("/showWishesPage")
     public String showCreateWishes(Model model) {
-        model.addAttribute("wishAll", wishlistRepository.getAll());
+        model.addAttribute("wishAll", wishRepository.getAll());
         return "showWishesPage";
 
     }
@@ -118,11 +104,11 @@ public class WishlistController {
     public String showCreateWishes(@RequestParam("wishDescription") String wishDescription) {
 
         System.out.println(wishDescription);
-        WishData newWishData = new WishData();
-        newWishData.setWishDescription(wishDescription);
-        System.out.println(newWishData);
+        Wish newWish = new Wish();
+        newWish.setWishDescription(wishDescription);
+        System.out.println(newWish);
 
-        wishlistRepository.addWishData(newWishData);
+        wishRepository.addWishData(newWish);
         return "redirect:/showWishesPage";
     }
 
@@ -130,16 +116,16 @@ public class WishlistController {
     @GetMapping("/updateWishData/{wishNumber}")
     public String showUpdateWishData(@PathVariable("wishNumber") int deleteWishNumber, Model model) {
 
-        model.addAttribute("wishes", wishlistRepository.findWishDataByNumber(deleteWishNumber));
+        model.addAttribute("wishes", wishRepository.findWishDataByNumber(deleteWishNumber));
 
         return "updateWishData";
 
     }
 
     @PostMapping("/updateWishData/")
-    public String showUpdateWishData(@ModelAttribute WishData wishes) {
+    public String showUpdateWishData(@ModelAttribute Wish wishes) {
 
-        wishlistRepository.updateWishData(wishes);
+        wishRepository.updateWishData(wishes);
 
         return "redirect:/showWishesPage";
 
@@ -148,7 +134,7 @@ public class WishlistController {
     @GetMapping("/deleteWishData/{wishNumber}")
     public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
 
-        wishlistRepository.deleteWishDataByNumber(deleteWishNumber);
+        wishRepository.deleteWishDataByNumber(deleteWishNumber);
 
         return "redirect:/showWishesPage";
 

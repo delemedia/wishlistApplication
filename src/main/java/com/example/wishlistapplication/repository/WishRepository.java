@@ -1,6 +1,6 @@
 package com.example.wishlistapplication.repository;
 
-import com.example.wishlistapplication.model.WishData;
+import com.example.wishlistapplication.model.Wish;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-public class WishlistRepository {
+public class WishRepository {
 
-public List<WishData> getAll() {
+public List<Wish> getAll() {
 
-    List<WishData> listOfWish = new LinkedList<>();
+    List<Wish> listOfWish = new LinkedList<>();
 
     try
     {
@@ -29,7 +29,7 @@ public List<WishData> getAll() {
             int wishNumber = resultSet.getInt("wishNumber");
             String wishDescription = resultSet.getString("wishDescription");
 
-            listOfWish.add(new WishData(wishNumber, wishDescription));
+            listOfWish.add(new Wish(wishNumber, wishDescription));
         }
 
     }
@@ -45,7 +45,7 @@ public List<WishData> getAll() {
 
 }
 
-public void addWishData(WishData newWishlistData) {
+public void addWishData(Wish newWishlistData) {
 
     try
     {
@@ -68,9 +68,9 @@ public void addWishData(WishData newWishlistData) {
 
 }
 
-public WishData findWishDataByNumber(int wishNumber) {
+public Wish findWishDataByNumber(int wishNumber) {
 
-    WishData wishes = new WishData();
+    Wish wishes = new Wish();
     wishes.setWishNumber(wishNumber);
 
     try {
@@ -100,7 +100,7 @@ public WishData findWishDataByNumber(int wishNumber) {
 
 }
 
-public void updateWishData(WishData wishes) {
+public void updateWishData(Wish wishes) {
 
     try {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",

@@ -1,7 +1,7 @@
 package com.example.wishlistapplication.repository;
 
 
-import com.example.wishlistapplication.model.CategoriData;
+import com.example.wishlistapplication.model.WishList;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -9,55 +9,43 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-public class CategoriRepository {
+public class WishListRepository {
 
-    public List<CategoriData> getAll() {
+    public List<WishList> getAllWishLists() {
 
-        List<CategoriData> listOfCategories = new LinkedList<>();
-
-        try
-        {
+        List<WishList> listOfAllWishlists = new LinkedList<>();
+        try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
-                    "kea2022"
-            );
-            PreparedStatement psts = conn.prepareStatement("SELECT * FROM categories");
+                    "kea2022");
+            PreparedStatement psts = conn.prepareStatement("SELECT * FROM Wishlists");
             ResultSet resultSet = psts.executeQuery();
 
             while(resultSet.next()) {
-
-
-                int listNumber = resultSet.getInt("listNumber");
-                String categoriDescription = resultSet.getString("categoriDescription");
-
-                listOfCategories.add(new CategoriData(listNumber, categoriDescription));
+                int wishListID = resultSet.getInt("wishListID");
+                String wishlistName = resultSet.getString("wishlistName");
+                listOfAllWishlists.add(new WishList(wishListID, wishlistName));
             }
-
         }
-
         catch (SQLException e)
         {
             System.out.println("Cannot connect to database");
             e.printStackTrace();
         }
-
-        return listOfCategories;
-
-
+        return listOfAllWishlists;
     }
 
-    public void addCategoriData(CategoriData newCategoriData) {
 
+    public void addWishlist(WishList newWishList) {
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
                     "kea2022");
-            String queryCreate = "INSERT INTO categories (categoriDescription) VALUES (?)";
+            String queryCreate = "INSERT INTO Wishlists (wishlistName) VALUES (?)";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-            psts.setString(1, newCategoriData.getCategoriDescription());
+            psts.setString(1, newWishList.getWishlistName());
 
             psts.executeUpdate();
 
@@ -70,78 +58,75 @@ public class CategoriRepository {
 
     }
 
-    public CategoriData findCategoriDataByNumber(int listNumber) {
+    public WishList findWishlistByID(int inputWishlistID) {
 
-        CategoriData categories = new CategoriData();
-        categories.setListNumber(listNumber);
+        WishList wishLists = new WishList();
+        wishLists.setWishListID(inputWishlistID);
 
         try {
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
                     "kea2022");
-            String queryCreate = "SELECT * FROM categories WHERE listNumber=?";
+            String queryCreate = "SELECT * FROM WishLists WHERE wishListID=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-            psts.setInt(1, listNumber);
+            psts.setInt(1, inputWishlistID);
 
             ResultSet rs = psts.executeQuery();
 
             rs.next();
-            String categoriDescription = rs.getString(2);
-            categories.setCategoriDescription(categoriDescription);
-            System.out.println(categories);
+            String inputWishlistName = rs.getString(2); //Naming??
+            wishLists.setWishlistName(inputWishlistName);
+            System.out.println(wishLists);
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Cannot connect to database");
             e.printStackTrace();
         }
 
-        return categories;
+        return wishLists;
 
     }
 
-    public void updateCategoriData(CategoriData categories) {
+    public void updateWishList(WishList wishList) {
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
                     "kea2022");
-            String queryCreate = "UPDATE categories SET categoriDescription=? WHERE listNumber=?";
+            String queryCreate = "UPDATE WishLists SET wishlistName=? WHERE wishListID=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
 
-            psts.setString(1, categories.getCategoriDescription());
-            psts.setInt(2, categories.getListNumber());
+            psts.setString(1, wishList.getWishlistName());
+            psts.setInt(2, wishList.getWishListID());
 
             psts.executeUpdate();
 
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Cannot connect to database");
             e.printStackTrace();
         }
 
     }
 
-    public void deleteCategoriDataByNumber(int deleteCategoriNumber) {
+    public void deleteWishList(int inputWishListID) {
 
         try {
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
                     "root",
                     "kea2022");
-            String queryCreate = "DELETE FROM categories WHERE listNumber=?";
+            String queryCreate = "DELETE FROM WishLists WHERE wishListID=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-            psts.setInt(1, deleteCategoriNumber);
+            psts.setInt(1, inputWishListID);
 
             psts.executeUpdate();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Cannot connect to database");
             e.printStackTrace();
         }

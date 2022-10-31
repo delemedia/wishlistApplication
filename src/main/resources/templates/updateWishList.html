@@ -12,10 +12,10 @@
 <h1>Change a Categori</h1>
 
 <br>
-<a th:href="@{/showListPage}" href="showListPage.html" class="Button_Effect">Back to categori list</a>
+<a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Back to categori list</a>
 <br> <br>
 
-<form action="/updateCategoriData/" method="post">
+<form action="/updateCategoriData/updateWishList.html" method="post">
 
   <input type="hidden" name="listNumber" th:value="${categories.listNumber}">
 
