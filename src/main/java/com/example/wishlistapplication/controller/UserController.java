@@ -13,14 +13,16 @@ public class UserController {
 
     UserRepository userRepository;
 
-    public UserController(UserRepository uR) {
-        userRepository = uR;
+    public UserController(UserRepository userRep) {
+        userRepository = userRep;
     }
+
 
     @GetMapping("/registerPage")
     public String showRegisterUser() {
         return "registerPage";
     }
+
 
     @PostMapping("/registerPage")
     public String registerUser(@RequestParam("name") String name, @RequestParam("email") String email) {
@@ -34,10 +36,12 @@ public class UserController {
         return "redirect:/";
     }
 
+
     @GetMapping("/loginPage")
     public String showUserLogIn (){
         return "loginPage";
     }
+
 
     @PostMapping("/loginPage")
     public String registerUser(@RequestParam("id") int id, @RequestParam("email") String email) {
