@@ -50,10 +50,11 @@ public class UserRepository {
     public void updateUser(User user) {
 
         try {
-            String queryUpdateUser = "UPDATE user" + "SET Email=? WHERE Id=?";
+            String queryUpdateUser = "UPDATE user" + "SET Name=?, Email=?, Password=? WHERE Id=?";
             PreparedStatement pstsUpdateUser = databaseServices.dbConnection().prepareStatement(queryUpdateUser);
-            pstsUpdateUser.setString(Integer.parseInt("Email"), user.getEmail()); // Check!! parameterindex!!
-            pstsUpdateUser.setInt(Integer.parseInt("Id"), user.getId()); // Check!! parameterindex!!
+            pstsUpdateUser.setString(1, user.getName());
+            pstsUpdateUser.setString(2, user.getEmail());
+            pstsUpdateUser.setString(3, user.getPassword());
             pstsUpdateUser.executeUpdate();
 
         } catch (SQLException dbConnectError) {
