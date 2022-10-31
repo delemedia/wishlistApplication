@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+  <title>Add a wish</title>
+</head>
+
+
+<body>
+<h1>Add a Categori list:</h1>
+
+<br>
+<a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Back to Categori List page</a>
+<br> <br>
+
+<form action="/createCategori" method="post">
+
+  <label for="name-field">Your Categori:</label>
+  <input id="name-field" name="categoriDescription" placeholder="Enter your Categori...">
+
+  <button type="submit" class="Button_Effect">Create Categori</button>
+
+</form>
+
+</body>
+</html>

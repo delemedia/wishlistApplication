@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
     <title>Welcome to Wishlist:</title>
 </head>
 <body>
@@ -11,6 +13,7 @@
 <br>
 <br>
 <a th:href="@{/registerPage}"><button>Register</button></a>
+<a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Go to wishlist</a>
 
 </body>
 </html>

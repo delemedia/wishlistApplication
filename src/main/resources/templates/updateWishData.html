@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+    <title>Change a wish</title>
+</head>
+
+<body>
+
+<h1>Change a wish</h1>
+
+<br>
+<a th:href="@{/showWishesPage}" href="showWishesPage.html" class="Button_Effect">Back to wishes</a>
+<br> <br>
+
+<form action="/updateWishData/" method="post">
+
+    <input type="hidden" name="wishNumber" th:value="${wishes.wishNumber}">
+
+    <label for="name-field">Your wish: </label>
+    <input id="name-field" name="wishDescription" placeholder="Change your wish..." th:value="${wishes.wishDescription}">
+
+    <button type="submit" class="Button_Effect">Change wish</button>
+
+</form>
+
+</body>
+</html>

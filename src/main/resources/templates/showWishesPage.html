@@ -20,19 +20,46 @@
 <body>
 <h1>Welcome to Create wishlist:</h1>
 
-<a th:href="@{/create}" href="create.html">Create a wish</a>
+<br>
 
-<div th:each="w : ${wishAll}">
+<div class="wishlistButtons_Container">
 
-    <span th:text="${w.getWishNumber()}"></span>
-    <span th:text="${w.getWishDescription()}"></span>
-    <span><a th:href="@{'/updateWish/' + ${w.getWishNumber()}}">Change</a></span>
-    <span><a th:href="@{'/deleteWish/' + ${w.getWishNumber()}}">Remove</a></span>
+    <div class="wishlistButtons_ContainerStyle" style="width:100%">
+
+
+        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Add a wish</a>
+
+        <!--
+        <a th:href="@{'/updateWish/'}" href="createWish.html">Change wish</a>
+        <a th:href="@{'/deleteWish/'}" href="createWish.html">Remove wish</a>
+        -->
+
+        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Share the list</a>
+
+        <a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Back to categories</a>
+
+    </div>
 
 </div>
 
+    <br>
 
-<a th:href="@{/showListPage}" href="showListPage.html">Tilbage til dine lister:</a>
+<table class="wishlistTable" style="width:100%">
+
+<div th:each="w : ${wishAll}">
+
+    <tr>
+        <th><span></span></th>
+        <!--  <th><span th:text="${w.getWishNumber()}"></span></th> -->
+        <td><span th:text="${w.getWishDescription()}"></span></td>
+
+        <th><span><a th:href="@{'/updateWishData/' + ${w.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
+        <th><span><a th:href="@{'/deleteWishData/' + ${w.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
+    </tr>
+
+</div>
+
+</table>
 
 </body>
 
