@@ -1,5 +1,6 @@
 package com.example.wishlistapplication.controller;
 
+import com.example.wishlistapplication.model.User;
 import com.example.wishlistapplication.model.Wish;
 import com.example.wishlistapplication.repository.WishRepository;
 import org.springframework.stereotype.Controller;
@@ -15,27 +16,23 @@ public class WishController {
         wishRepository = wishRep;
     }
 
+
     @GetMapping("/showWishesPage")
-    public String showCreateWishes(Model model) {
+    public String showWishesPage(Model model) {
         model.addAttribute("wishAll", wishRepository.getAllWishes());
         return "wish/showWishesPage";
     }
 
 
     @GetMapping("/createWish")
-    public String showCreateWishes() {
+    public String showCreateWish(Model model) {
+        model.addAttribute("wish", new Wish());
         return "wish/createWish";
     }
 
-
     @PostMapping("/createWish")
-    public String showCreateWishes(@RequestParam("wishDescription") String wishDescription) {
-
-        System.out.println(wishDescription);
-        Wish newWish = new Wish();
-        newWish.setWishDescription(wishDescription);
-        System.out.println(newWish);
-        wishRepository.addWish(newWish);
+    public String CreateWish(Wish wish){
+        wishRepository.addWish(wish);
         return "redirect:wish/showWishesPage";
     }
 

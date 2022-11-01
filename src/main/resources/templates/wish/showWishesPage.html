@@ -27,16 +27,9 @@
     <div class="wishlistButtons_ContainerStyle" style="width:100%">
 
 
-        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Add a wish</a>
-
-        <!--
-        <a th:href="@{'/updateWish/'}" href="createWish.html">Change wish</a>
-        <a th:href="@{'/deleteWish/'}" href="createWish.html">Remove wish</a>
-        -->
-
-        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Share the list</a>
-
-        <a th:href="@{/showListPage}" href="../wishlist/showWishListsPage.html" class="Button_Effect">Back to categories</a>
+        <a th:href="@{/createWish}" href="createWish.html" class="Button_Effect">Add a New Wish</a>
+        <a th:href="@{/createWish}" href="../contributer/wishListSharingPage.html" class="Button_Effect">Share your list</a>
+        <a th:href="@{/showListPage}" href="../wishlist/showWishListsPage.html" class="Button_Effect">Back to Your Wish Lists</a>
 
     </div>
 
@@ -46,15 +39,15 @@
 
 <table class="wishlistTable" style="width:100%">
 
-<div th:each="w : ${wishAll}">
+<div th:each="wishRep : ${wishAll}">
 
     <tr>
         <th><span></span></th>
         <!--  <th><span th:text="${w.getWishNumber()}"></span></th> -->
-        <td><span th:text="${w.getWishDescription()}"></span></td>
+        <td><span th:text="${wishRep.wishAll()}"></span></td>
 
-        <th><span><a th:href="@{'/updateWishData/' + ${w.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
-        <th><span><a th:href="@{'/deleteWishData/' + ${w.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
+        <th><span><a th:href="@{'/updateWishData/' + ${wishRep.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
+        <th><span><a th:href="@{'/deleteWishData/' + ${wishRep.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
     </tr>
 
 </div>

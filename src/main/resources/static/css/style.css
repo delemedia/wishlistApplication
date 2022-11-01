@@ -64,20 +64,20 @@
 
 
 
-.categoriListTable {
+.wishListsTable {
     border-top: dotted lightgrey 2px;
     border-bottom: dotted lightgrey 2px;
     padding: 20px;
 }
 
-.categoriListButtons_Container {
+.wishListsButtons_Container {
 
     display: flex;
     flex-direction: row;
 
 }
 
-.categoriListButtons_ContainerStyle {
+.wishListsButtons_ContainerStyle {
 
     display: flex;
     justify-content: space-between;

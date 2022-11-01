@@ -1,6 +1,8 @@
 package com.example.wishlistapplication.model;
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class User {
 
     private int id;
@@ -48,5 +50,8 @@ public class User {
         this.password = password;
     }
 
-
+    public void encodePassword() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        password = encoder.encode(password);
+    }
 }

@@ -17,7 +17,7 @@ public class WishListRepository {
     public List<WishList> getAllWishLists() {
 
         try {
-            PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM Wishlists");
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM WishLists");
             ResultSet resultSet = psts.executeQuery();
             while (resultSet.next()) {
                 int wishListID = resultSet.getInt("wishListID");
@@ -34,7 +34,7 @@ public class WishListRepository {
     public void addWishlist(WishList newWishList) {
 
         try {
-            String queryCreate = "INSERT INTO Wishlists (wishlistName) VALUES (?)";
+            String queryCreate = "INSERT INTO Wishlists (wishlistName) VALUES   (?)";
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
             psts.setString(1, newWishList.getWishlistName());
             psts.executeUpdate();
@@ -47,8 +47,8 @@ public class WishListRepository {
 
     public WishList findWishlistByID(int inputWishlistID) {
 
-        WishList wishLists = new WishList();
-        wishLists.setWishListID(inputWishlistID);
+        WishList wishListObject = new WishList();
+        wishListObject.setWishListID(inputWishlistID);
 
         try {
             String queryCreate = "SELECT * FROM WishLists WHERE wishListID=?";
@@ -57,13 +57,13 @@ public class WishListRepository {
             ResultSet rs = psts.executeQuery();
             rs.next();
             String inputWishlistName = rs.getString(2); //Naming??
-            wishLists.setWishlistName(inputWishlistName);
-            System.out.println(wishLists);
+            wishListObject.setWishlistName(inputWishlistName);
+            System.out.println(wishListObject);
 
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
-        return wishLists;
+        return wishListObject;
     }
 
 

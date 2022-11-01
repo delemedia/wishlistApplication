@@ -63,15 +63,15 @@ public class UserRepository {
 
     }
 
-    public User findUserById(int userID) {
+    public User findUserById(int inputUserID) {
 
         User userObject = new User();
-        userObject.setId(userID);
+        userObject.setId(inputUserID);
 
         try {
-            String queryfindUserById = "SELECT * FROM Users WHERE=?";
+            String queryfindUserById = "SELECT * FROM Users WHERE Id=?";
             PreparedStatement pstsfindUserById = databaseServices.dbConnection().prepareStatement(queryfindUserById);
-            pstsfindUserById.setInt(1, userID);
+            pstsfindUserById.setInt(1, inputUserID);
             ResultSet usersResSet = pstsfindUserById.executeQuery();
             usersResSet.next();
             String userEmail = usersResSet.getString(2);

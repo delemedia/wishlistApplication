@@ -9,7 +9,7 @@
 <h1>New Wisher</h1>
 <h2>Enter your name & email for registration.</h2>
 
-<form action="/createUser" th:object="${user}" method="post">
+<form th:action="@{/registerPage}" th:object="${user}" th:method="post">
     <label for="name-field">Name: </label>
     <input id="name-field" name="name" required="required">
     <label for="email-field">Email: </label>

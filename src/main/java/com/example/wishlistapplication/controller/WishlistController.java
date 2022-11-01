@@ -15,30 +15,25 @@ public class WishlistController {
         wishListRepository = wishListRep;
     }
 
-
     @GetMapping("/showWishListsPage")
     public String showWishListsPage(Model model) {
-        model.addAttribute("listAll", wishListRepository.getAllWishLists()); //attribute name??
+        model.addAttribute("wishListAll", wishListRepository.getAllWishLists());
         return "wishlist/showWishListsPage";
     }
 
 
     @GetMapping("/createWishList")
-    public String showCreateWishList() {
+    public String showCreateWishList(Model model) {
+        model.addAttribute("wishList", new WishList());
         return "wishlist/createWishList";
     }
 
 
     @PostMapping("/createWishList")
-    public String showCreateWishList(@RequestParam("wishlistName") String wishlistName) {
-
-        System.out.println(wishlistName);
-        WishList newWishList = new WishList();
-        newWishList.setWishlistName(wishlistName);
-        System.out.println(newWishList);
-
-        wishListRepository.addWishlist(newWishList);
-        return "redirect:wishlist/showWishListsPage";
+    public String createWishList(WishList wishList){
+        System.out.println(wishList.getWishlistName());
+        wishListRepository.addWishlist(wishList);
+        return "redirect:/showWishListsPage";
     }
 
 

@@ -48,24 +48,24 @@ public class WishRepository {
     }
 
 
-    public Wish findWishByNumber(int wishNumber) {
-        Wish wishes = new Wish();
-        wishes.setWishNumber(wishNumber);
+    public Wish findWishByNumber(int inputWishNumber) {
+        Wish wishObject = new Wish();
+        wishObject.setWishNumber(inputWishNumber);
 
         try {
             String queryCreate = "SELECT * FROM wishes WHERE wishNumber=?";
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
-            psts.setInt(1, wishNumber);
+            psts.setInt(1, inputWishNumber);
             ResultSet rs = psts.executeQuery();
             rs.next();
             String wishDescription = rs.getString(2);
-            wishes.setWishDescription(wishDescription);
-            System.out.println(wishes);
+            wishObject.setWishDescription(wishDescription);
+            System.out.println(wishObject);
 
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
-        return wishes;
+        return wishObject;
     }
 
     public void updateWish(Wish wishes) {
