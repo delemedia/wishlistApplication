@@ -1,7 +1,9 @@
 package com.example.wishlistapplication.config;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -59,5 +61,16 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static CustomUserDetails GetAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = auth.getPrincipal();
+        CustomUserDetails user = null;
+        
+        if (principal instanceof CustomUserDetails)
+            return (CustomUserDetails) principal;
+        else
+            return null;
     }
 }

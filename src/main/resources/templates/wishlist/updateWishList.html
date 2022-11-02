@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
-  <title>Change a wish</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+	<title>Change a wish</title>
 </head>
 
 <body>
 
-<h1>Change a Categori</h1>
+	<span th:replace="fragments/error"></span>
 
-<br>
-<a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Back to categori list</a>
-<br> <br>
+	<h1>Change a Categori</h1>
 
-<form action="/updateCategoriData/updateWishList.html" method="post">
+	<br>
+	<a th:href="@{/showListPage}" href="showWishListsPage.html" class="Button_Effect">Back to categori list</a>
+	<br> <br>
 
-  <input type="hidden" name="listNumber" th:value="${categories.listNumber}">
+	<form th:action="@{/updateWishList}" th:object="${wishList}" th:method="patch">
 
-  <label for="name-field">Your categori: </label>
-  <input id="name-field" name="categoriDescription" placeholder="Change your categori..." th:value="${categories.categoriDescription}">
+		<input type="hidden" name="wishListID" th:value="${wishList.getWishListID()}">
 
-  <button type="submit" class="Button_Effect">Change categori</button>
+		<label for="name-field">Wishlist name</label>
+		<input id="name-field" name="wishlistName" type="text" placeholder="Enter name" th:value="${wishList.getWishlistName()}" required>
 
-</form>
+		<button type="submit" class="Button_Effect">Save</button>
+
+	</form>
 
 </body>
+
 </html>

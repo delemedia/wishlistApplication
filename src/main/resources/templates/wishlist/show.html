@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+    <title>WishLists</title>
+</head>
+    <body>
+        <header>
+            <div class="HeaderContainer">
+        
+                <div class="TopHeaderSplashIMG">
+                    <div>WishList Title:</div>
+                    <div class="splashText" th:text="${wishList.getWishlistName()}"></div>
+                </div>
+
+                <a th:href="@{/showWishListsPage}" class="Button_Effect">All Wishlists</a>
+                <a th:href="@{/createWish?wishlist_id={id}(id=${wishList.getWishListID()})}" class="Button_Effect">Add Wish</a>
+        
+            </div>
+        </header>
+        
+        <span th:replace="fragments/error"></span>
+        <h1>Your Wishes</h1>
+        <table class="wishListsTable" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Content</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <div th:each="wish : ${wishes}">
+                <tr>
+                    <td>
+                        <span th:text="${wish.getWishNumber()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${wish.getWishDescription()}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{'/updateWishData/' + ${wish.getWishNumber()}}" class="Button_Effect">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/deleteWishData/{wishNumber}/{wishListID}(wishNumber=${wish.getWishNumber()}, wishListID=${wishList.getWishListID()}) }" class="Button_Effect_Delete">Delete</a>
+                    </td>
+                </tr>
+            </div>
+        </table>
+
+    </body>
+</html>
