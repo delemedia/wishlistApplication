@@ -3,16 +3,25 @@ package com.example.wishlistapplication.model;
 public class Wish {
 
     private int wishNumber;
+    private int wishListID;
     private String wishDescription;
 
 
     public Wish (){}
-    public Wish(int wishNumber, String wishDescription) {
+
+    public Wish(int wishNumber, int wishListID, String wishDescription) {
         this.wishNumber = wishNumber;
+        this.wishListID = wishListID;
         this.wishDescription = wishDescription;
     }
 
-    public Wish(int wisheswishID) {}
+    public int getWishListID() {
+        return wishListID;
+    }
+
+    public void setWishListID(int wishListID) {
+        this.wishListID = wishListID;
+    }
 
     public int getWishNumber() {
         return wishNumber;

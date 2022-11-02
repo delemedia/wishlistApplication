@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+    <title>WishLists</title>
+</head>
+<body>
+    <header>
+        <div class="HeaderContainer">
+    
+            <div class="TopHeaderSplashIMG">
+                <div class="splashText">Wish Lists:</div>
+            </div>
+    
+        </div>
+    </header>
+
+    <span th:replace="fragments/error"></span>
+    <h1>Your Wish Lists</h1>
+
+    <br>
+
+    <div class="wishListsButtons_Container">
+
+        <div class="wishListsButtons_ContainerStyle" style="width:100%">
+
+            <a th:href="@{/createWishList}" href="createWishList.html" class="Button_Effect">Create a New Wish List</a>
+            <a th:href="@{/wishlistSharingPage}" href="../contributer/wishListSharingPage.html.html"
+                class="Button_Effect">Share Your list</a>
+            <a th:href="@{/}" href="../home/showIndex.html" class="Button_Effect">Back to Home</a>
+
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+    <table class="wishListsTable" style="width:100%">
+
+        <div th:each="wishListRep : ${wishListAll}">
+
+            <tr>
+                <td>
+                    <span th:text="${wishListRep.getWishListID()}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/wishlists/{id}(id=${wishListRep.getWishListID()})}" href="showWishesPage.html">
+                        <span th:text="${wishListRep.getWishlistName()}" class="Button_Effect"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/updateWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{'/deleteWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect_Delete">Delete</a>
+                </td>
+            </tr>
+
+        </div>
+    </table>
+
+</body>
+
+</html>

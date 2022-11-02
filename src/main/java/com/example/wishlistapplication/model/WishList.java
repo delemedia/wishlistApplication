@@ -3,10 +3,12 @@ package com.example.wishlistapplication.model;
 public class WishList {
 
     private int wishListID;
+    private int UserID;
     private String wishlistName;
 
-    public WishList(int wishListID, String wishlistName){
+    public WishList(int wishListID, int UserID, String wishlistName){
         this.wishListID = wishListID;
+        this.UserID = UserID;
         this.wishlistName = wishlistName;
     }
 
@@ -18,6 +20,14 @@ public class WishList {
 
     public void setWishListID(int wishListID) {
         this.wishListID = wishListID;
+    }
+
+    public void setUserID(int id) {
+        UserID = id;
+    }
+
+    public int getUserID() {
+        return UserID;
     }
 
     public String getWishlistName() {
