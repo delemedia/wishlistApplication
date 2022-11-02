@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+  <title>Add a wish</title>
+</head>
+
+
+<body>
+<span th:text="${wishList}"> </span>
+<h1>Create a New Wish List:</h1>
+<br>
+<form th:action="@{/createWishList}" th:object="${wishList}" th:method="post">
+<input type="hidden" name="UserID" th:value="${#authentication.principal.getId()}">
+  <label for="name-field">Wish List Name:</label>
+  <input id="name-field" name="wishlistName" placeholder="Enter a name for a new Wishlist">
+
+  <button type="submit" class="Button_Effect">Create List</button>
+
+</form>
+
+<br>
+<a th:href="@{/showWishListsPage.html}" href="showWishListsPage.html" class="Button_Effect">Back to Wish Lists Page</a>
+<br>
+
+</body>
+</html>

@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
     <title>Add a wish</title>
 </head>
 
 
 <body>
-<h1>Add a wish</h1>
-
+<h1>Create a New Wish</h1>
 <br>
-<a th:href="@{/showWiseshPage}" href="showWishesPage.html" class="Button_Effect">Back to wishes</a>
-<br> <br>
-
 <form action="/createWish" method="post">
 
-    <label for="name-field">Your wish:</label>
-    <input id="name-field" name="wishDescription" placeholder="Enter your wish...">
+    <label for="name-field">Wish Description:</label>
+    <input id="name-field" name="wishDescription" placeholder="Enter your wish here...">
 
     <button type="submit" class="Button_Effect">Add your wish</button>
 
 </form>
+
+<br>
+<a th:href="@{/showWishesPage}" href="showWishesPage.html" class="Button_Effect">Back to Wishes</a>
+<br>
 
 </body>
 </html>

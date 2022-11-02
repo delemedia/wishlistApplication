@@ -3,6 +3,7 @@ package com.example.wishlistapplication.model;
 public class Contributer {
 
     private String contributerName;
+    //private int wisheswishID;
 
     public Contributer(){}
 

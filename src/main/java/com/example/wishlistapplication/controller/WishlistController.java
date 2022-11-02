@@ -15,43 +15,32 @@ public class WishlistController {
         wishListRepository = wishListRep;
     }
 
-
-    @GetMapping("/")
-    public String showIndex() {
-        return "showIndex";
-    }
-
-
     @GetMapping("/showWishListsPage")
     public String showWishListsPage(Model model) {
-        model.addAttribute("listAll", wishListRepository.getAllWishLists()); //attribute name??
-        return "showWishListsPage";
+        model.addAttribute("wishListAll", wishListRepository.getAllWishLists());
+        return "wishlist/showWishListsPage";
     }
 
 
     @GetMapping("/createWishList")
-    public String showCreateWishList() {
-        return "createWishList";
+    public String showCreateWishList(Model model) {
+        model.addAttribute("wishList", new WishList());
+        return "wishlist/createWishList";
     }
 
 
     @PostMapping("/createWishList")
-    public String showCreateWishList(@RequestParam("wishlistName") String wishlistName) {
-
-        System.out.println(wishlistName);
-        WishList newWishList = new WishList();
-        newWishList.setWishlistName(wishlistName);
-        System.out.println(newWishList);
-
-        wishListRepository.addWishlist(newWishList);
-        return "redirect:/showListPage";
+    public String createWishList(WishList wishList){
+        System.out.println(wishList.getWishlistName());
+        wishListRepository.addWishlist(wishList);
+        return "redirect:/showWishListsPage";
     }
 
 
     @GetMapping("/updateWishList/{wishListID}")
     public String showUpdateWishList(@PathVariable("wishListID") int deleteWishListID, Model model) {
         model.addAttribute("categories", wishListRepository.findWishlistByID(deleteWishListID));
-        return "updateWishList";
+        return "wishlist/updateWishList";
 
     }
 

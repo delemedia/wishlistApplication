@@ -9,19 +9,19 @@ import java.util.List;
 
 public class DatabaseServices {
 
-    Connection dbConnect;
-
     // Database username & password proxy values
     @Value("${spring.datasource.url}")
-    private String wishlistdb_url;
+    private String wishlistdb_url = "jdbc:mysql://localhost:3306/wishlistdb";
 
     @Value("${spring.datasource.username}")
-    private String wishlistdbAdmin_userName;
+    private String wishlistdbAdmin_userName = "wishlistdbAdmin";
 
     @Value("${spring.datasource.password}")
-    private String wishlistdbAdmin_password;
+    private String wishlistdbAdmin_password = "wishlistdbAdminPassword";
 
-    //DB Connection Method
+
+    //DB Connection
+    Connection dbConnect;
     public Connection dbConnection() throws SQLException {
         if (dbConnect == null) {
             dbConnect = DriverManager.getConnection(wishlistdb_url, wishlistdbAdmin_userName, wishlistdbAdmin_password);
@@ -29,26 +29,11 @@ public class DatabaseServices {
         return dbConnect;
     }
 
-    //DB Connection Error Method
+    //DB Connection Error
     public void dbConnectionError (SQLException dbConnectError){
         System.out.println("Cannot connect to database.");
         dbConnectError.printStackTrace();
     }
 
-
-// UserRepository preparedStatement (Exercise)
-    public List<User> preparedStatementGetAllUsers() throws SQLException {
-        Connection connection = dbConnection();
-        List<User> listOfAllUsers = new LinkedList<>();
-        PreparedStatement pstsGetAllUsers = connection.prepareStatement("SELECT * FROM Users");
-        ResultSet resultSet = pstsGetAllUsers.executeQuery();
-        while(resultSet.next()) {
-            int userId = resultSet.getInt("Id");
-            String userName = resultSet.getString("Name");
-            String userEmail = resultSet.getString("Email");
-            listOfAllUsers.add(new User(userId, userName, userEmail));
-        }
-        return listOfAllUsers;
-    }
 
 }

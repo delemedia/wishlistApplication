@@ -10,7 +10,7 @@ public class WishList {
         this.wishlistName = wishlistName;
     }
 
-    public WishList(){};
+    public WishList(){}
 
     public int getWishListID() {
         return wishListID;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+    <title>Welcome to Wishlist:</title>
+</head>
+<body>
+
+<h1>Welcome to the Wishlist:</h1>
+
+
+<br>
+<span th:text="${#authentication}"></span>
+<br>
+<span sec:authorize="hasRole('USER')">
+        USER LOGGED IN
+    <br>
+    <a th:href="@{/logout}"class="Button_Effect">Log Out</a>
+</span>
+<br>
+<span sec:authorize="!hasRole('USER')">
+        USER NOT LOGGED IN
+    <br>
+<a th:href="@{/login}"class="Button_Effect">Log In</a>
+<br>
+<br>
+<a th:href="@{/registerPage}" class="Button_Effect">Register</a>
+</span>
+
+
+</body>
+</html>
