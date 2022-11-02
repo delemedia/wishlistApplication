@@ -34,7 +34,7 @@ public class WishListRepository {
     public void addWishlist(WishList newWishList) {
 
         try {
-            String queryCreate = "INSERT INTO Wishlists (wishlistName) VALUES   (?)";
+            String queryCreate = "INSERT INTO WishLists (wishlistName) VALUES (?)";
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
             psts.setString(1, newWishList.getWishlistName());
             psts.executeUpdate();

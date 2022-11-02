@@ -33,7 +33,7 @@ public class WishController {
     @PostMapping("/createWish")
     public String CreateWish(Wish wish){
         wishRepository.addWish(wish);
-        return "redirect:wish/showWishesPage";
+        return "redirect:/showWishesPage";
     }
 
 
@@ -47,13 +47,13 @@ public class WishController {
     @PostMapping("/updateWishData/")
     public String showUpdateWishData(@ModelAttribute Wish wishes) {
         wishRepository.updateWish(wishes);
-        return "redirect:wish/showWishesPage";
+        return "redirect:/showWishesPage";
     }
 
 
     @GetMapping("/deleteWishData/{wishNumber}")
     public String deleteWishData(@PathVariable("wishNumber") int deleteWishNumber) {
         wishRepository.deleteWishById(deleteWishNumber);
-        return "redirect:wish/showWishesPage";
+        return "redirect:/showWishesPage";
     }
 }
