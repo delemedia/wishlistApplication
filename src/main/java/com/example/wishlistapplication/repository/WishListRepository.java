@@ -1,7 +1,7 @@
 package com.example.wishlistapplication.repository;
 
-
 import com.example.wishlistapplication.model.WishList;
+import com.example.wishlistapplication.utilities.DatabaseServices;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -10,127 +10,95 @@ import java.util.List;
 
 @Repository
 public class WishListRepository {
+    
+    DatabaseServices databaseServices = new DatabaseServices();
 
     public List<WishList> getAllWishLists() {
-
         List<WishList> listOfAllWishlists = new LinkedList<>();
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "kea2022");
-            PreparedStatement psts = conn.prepareStatement("SELECT * FROM Wishlists");
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM WishLists");
             ResultSet resultSet = psts.executeQuery();
-
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 int wishListID = resultSet.getInt("wishListID");
-                String wishlistName = resultSet.getString("wishlistName");
-                listOfAllWishlists.add(new WishList(wishListID, wishlistName));
+                int UserID = resultSet.getInt("UserID");
+                String wishlistName = resultSet.getString("wishlistName");                
+                listOfAllWishlists.add(new WishList(wishListID, UserID, wishlistName));
             }
-        }
-        catch (SQLException e)
-        {
-            System.out.println("Cannot connect to database");
-            e.printStackTrace();
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
         return listOfAllWishlists;
     }
 
-
-    public void addWishlist(WishList newWishList) {
-
+    public List<WishList> findWhere(String column, Object value) {
+        List<WishList> listOfAllWishlists = new LinkedList<>();
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "kea2022");
-            String queryCreate = "INSERT INTO Wishlists (wishlistName) VALUES (?)";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
-
-            psts.setString(1, newWishList.getWishlistName());
-
-            psts.executeUpdate();
-
-        } catch (SQLException e) {
-
-            System.out.println("Cannot connect to database");
-            e.printStackTrace();
-
+            String sql = String.format("SELECT * FROM WishLists WHERE %s = ?", column);
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(sql);
+            psts.setObject(1, value);
+            System.out.println(psts);
+            ResultSet resultSet = psts.executeQuery();
+            while (resultSet.next()) {
+                int wishListID = resultSet.getInt("wishListID");
+                int UserID = resultSet.getInt("UserID");
+                String wishlistName = resultSet.getString("wishlistName");                
+                listOfAllWishlists.add(new WishList(wishListID, UserID, wishlistName));
+            }
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
-
+        return listOfAllWishlists;
     }
+
+    public void addWishlist(WishList newWishList) throws SQLException {        
+        String queryCreate = "INSERT INTO WishLists (wishlistName, UserID) VALUES (?, ?)";
+        PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+        psts.setString(1, newWishList.getWishlistName());
+        psts.setInt(2, newWishList.getUserID());
+        psts.executeUpdate();
+    }
+
 
     public WishList findWishlistByID(int inputWishlistID) {
-
-        WishList wishLists = new WishList();
-        wishLists.setWishListID(inputWishlistID);
+        WishList wishList = null;
 
         try {
-
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "kea2022");
             String queryCreate = "SELECT * FROM WishLists WHERE wishListID=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
-
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
             psts.setInt(1, inputWishlistID);
-
             ResultSet rs = psts.executeQuery();
-
             rs.next();
-            String inputWishlistName = rs.getString(2); //Naming??
-            wishLists.setWishlistName(inputWishlistName);
-            System.out.println(wishLists);
-
+            wishList = new WishList(
+                rs.getInt("wishListID"),
+                rs.getInt("UserID"),
+                rs.getString("wishlistName")
+            ); 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database");
-            e.printStackTrace();
+            e.getStackTrace();
         }
 
-        return wishLists;
-
+        return wishList;        
     }
 
-    public void updateWishList(WishList wishList) {
 
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "kea2022");
-            String queryCreate = "UPDATE WishLists SET wishlistName=? WHERE wishListID=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
-
-
-            psts.setString(1, wishList.getWishlistName());
-            psts.setInt(2, wishList.getWishListID());
-
-            psts.executeUpdate();
-
-
-        } catch (SQLException e) {
-            System.out.println("Cannot connect to database");
-            e.printStackTrace();
-        }
-
+    public void updateWishList(WishList wishList) throws SQLException {
+        String queryCreate = "UPDATE WishLists SET wishlistName=? WHERE wishListID=?";
+        PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+        psts.setString(1, wishList.getWishlistName());
+        psts.setInt(2, wishList.getWishListID());
+        psts.executeUpdate();
     }
+
 
     public void deleteWishList(int inputWishListID) {
-
         try {
-
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishlistdb",
-                    "root",
-                    "kea2022");
             String queryCreate = "DELETE FROM WishLists WHERE wishListID=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
-
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
             psts.setInt(1, inputWishListID);
-
             psts.executeUpdate();
 
-        } catch (SQLException e) {
-            System.out.println("Cannot connect to database");
-            e.printStackTrace();
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
         }
-
     }
-
 }

@@ -3,21 +3,30 @@
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
 
 }
 
 .TopHeaderSplashIMG {
 
-    width: 100%;
-    height: 100px;
-    border: solid steelblue 5px;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
 
-    background-color: steelblue;
+    width: 500px;
+    height: 100px;
+    border: gold solid 2px;
+
+    border-radius: 60%;
+    background-color: dodgerblue;
 
 }
 
 .splashText {
+
 
     display: flex;
     flex-direction: row;
@@ -29,10 +38,11 @@
 
     font-style: italic;
     font-weight: bold;
-    font-family: "Century Gothic";
+    font-family: "lucida handwriting";
+    font-size: 30px;
     color: white;
 
-    padding-top: 40px;
+    text-shadow: 2px 2px 4px #000000;
 
 
 }
@@ -54,7 +64,7 @@
 .wishlistButtons_ContainerStyle {
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     padding: 30px;
     border-top: dotted lightgrey 2px;
@@ -63,10 +73,9 @@
 }
 
 
-
 .wishListsTable {
-    border-top: dotted lightgrey 2px;
-    border-bottom: dotted lightgrey 2px;
+    border-top: dotted gold 2px;
+    border-bottom: dotted gold 2px;
     padding: 20px;
 }
 
@@ -88,39 +97,254 @@
 
 }
 
-.Button_Effect {
+.fillerSpace {
 
-    text-decoration: none;
-    background-color: dodgerblue;
-    color: white;
-    padding: 5px;
-    border-radius: 10%;
+    width: 120px;
+
 
 }
 
-.Button_Effect:hover {
+.fillerSpaceWishes {
 
+    width: 150px;
+
+}
+
+.Button_Effect {
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 20px;
+}
+
+.Button_Effect:hover {
   opacity: 70%;
-    color: black;
+    color: black
+}
+
+.Button_Effect_wish {
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 20px;
+    width: 150px;
+}
+
+.Button_Effect_wish:hover {
+    opacity: 70%;
+    color: black
+}
+
+.Button_Effect_save {
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 2px;
+    border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 25px;
+
+
+
+}
+
+.Button_Effect_save:hover {
+    opacity: 70%;
+    color: black
+
 
 }
 
 
 .Button_Effect_Delete {
-
     text-decoration: none;
     background-color: red;
     color: white;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 20px;
+}
+
+.Button_Effect_Delete:hover {
+    opacity: 70%;
+    color: black;
+}
+
+/* The new style code lines: */
+
+h1 {
+    font-family: "Brush Script MT";
+}
+
+h2 {
+    font-family: "Ink Free";
+}
+
+label {
+    font-family: "gabriola";
+    font-size: 20px;
+}
+
+.icon {
+    padding: 5px;
+    background: dodgerblue;
+    color: white;
+    min-width: 20px;
+    text-align: center;
+    border-radius:10%;
+}
+
+.icon2 {
+
+    padding: 5px;
+    background: red;
+    color: white;
+    min-width: 20px;
+    text-align: center;
+    border-radius:10%;
+
+}
+
+.showIndex_Box {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.showIndexBorder {
+    border: dotted gold 2px;
+    width: 200px;
+    height: 270px;
+}
+
+.showIndex_ButtonBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.input-field {
+    padding: 5px;
+    outline: none;
+    font-family: "gabriola";
+    font-size: 20px;
+    cursor: pointer;
+
+    position: relative;
+    left: 10px;
+}
+
+.registerBtn {
+
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 20px;
+    
+}
+
+.registerBtn:hover {
+    opacity: 70%;
+    color: black;
+    cursor: pointer;
+}
+
+.registerPageBorder {
+
+    width:  260px;
+    height: 370px;
+    border: dotted gold 2px;
+
+}
+
+.registerPageBox {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.registerPageTextBox {
+    display: flex;
+    flex-direction: row;
+
+   justify-content: center;
+
+}
+
+.registerPageButtonBox {
+    display: flex;
+    flex-direction: row;
+
 
 
 }
 
-.Button_Effect_Delete:hover {
+.smokeIMG {
 
-    opacity: 70%;
-    color: black;
+    width: 100%;
+    height: 100%;
+
+}
+
+body {
+
+    background-image: url('/img/genie.png');
+    background-repeat: no-repeat;
+    background-size: 900px 900px;
+
+   /* background-position: right top; */
+    background-position: 650px 150px;
+
+}
+
+.createWishlistBorder {
+
+    border: dotted gold 2px;
+    width: 300px;
+    height: 320px;
+
+}
+
+.createWishBorder {
+
+    border: dotted gold 2px;
+    width: 280px;
+    height: 320px;
+
+}
+
+.updateWishlistBorder {
+
+    border: dotted gold 2px;
+    width: 300px;
+    height: 340px;
+
+}
+
+.updateWishDataBorder {
+
+    border: dotted gold 2px;
+    width: 300px;
+    height: 320px;
+
+}
+
+.boxPosition {
+    position: relative;
+    left: 100px;
+    top: 100px;
+
 
 }
 

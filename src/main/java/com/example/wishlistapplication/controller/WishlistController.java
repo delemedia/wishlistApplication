@@ -82,7 +82,7 @@ public class WishlistController {
     }
 
     // UPDATE
-    @PatchMapping("/updateWishList")
+    @PatchMapping("/updateWishList/")
     public String showUpdateWishList(@ModelAttribute WishList wishLists, RedirectAttributes redirectAttributes) {
 
         CustomUserDetails authUser = CustomUserDetails.GetAuthenticatedUser();

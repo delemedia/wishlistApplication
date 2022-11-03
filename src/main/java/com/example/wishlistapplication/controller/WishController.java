@@ -46,7 +46,7 @@ public class WishController {
         WishList dbWishList = wishListRepository.findWishlistByID(wish.getWishListID());
         if (dbWishList.getUserID() != authUser.getId()) {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
-            return "redirect:/";
+            return "redirect:/show";
         }
         
         try {
@@ -75,7 +75,7 @@ public class WishController {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
             return "redirect:/";
         }
-        
+
         try {
             wishRepository.updateWish(wish);
             return "redirect:/wishlists/" + wish.getWishListID();

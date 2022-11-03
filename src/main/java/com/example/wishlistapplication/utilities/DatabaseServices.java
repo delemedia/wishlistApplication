@@ -14,10 +14,10 @@ public class DatabaseServices {
     private String wishlistdb_url = "jdbc:mysql://localhost:3306/wishlistdb";
 
     @Value("${spring.datasource.username}")
-    private String wishlistdbAdmin_userName = "wishlistdbAdmin";
+    private String wishlistdbAdmin_userName = "root";
 
     @Value("${spring.datasource.password}")
-    private String wishlistdbAdmin_password = "wishlistdbAdminPassword";
+    private String wishlistdbAdmin_password = "kea2022";
 
 
     //DB Connection

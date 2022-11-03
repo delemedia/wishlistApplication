@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>WishLists</title>
 </head>
 <body>
@@ -12,14 +13,14 @@
         <div class="HeaderContainer">
     
             <div class="TopHeaderSplashIMG">
-                <div class="splashText">Wish Lists:</div>
+                <div class="splashText" >'Username'<br>&nbsp;Wish Lists</div>
             </div>
-    
+
         </div>
     </header>
 
-    <span th:replace="fragments/error"></span>
-    <h1>Your Wish Lists</h1>
+   <!-- <span th:replace="fragments/error"></span> -->
+   <!-- <h1>Your Wish Lists</h1> -->
 
     <br>
 
@@ -27,10 +28,10 @@
 
         <div class="wishListsButtons_ContainerStyle" style="width:100%">
 
-            <a th:href="@{/createWishList}" href="createWishList.html" class="Button_Effect">Create a New Wish List</a>
+            <a th:href="@{/createWishList}" href="createWishList.html" class="Button_Effect"><i class="fa fa-plus icon"></i>Create a New&nbsp;&nbsp;-&nbsp;&nbsp; Wish List</a>
             <a th:href="@{/wishlistSharingPage}" href="../contributer/wishListSharingPage.html.html"
-                class="Button_Effect">Share Your list</a>
-            <a th:href="@{/}" href="../home/showIndex.html" class="Button_Effect">Back to Home</a>
+                class="Button_Effect">Share Your list<i class="fa fa-share-square-o icon"></i></a>
+            <a th:href="@{/}" href="../home/showIndex.html" class="Button_Effect"><i class=" fa fa-reply icon"></i>Back to Login</a>
 
         </div>
 
@@ -38,30 +39,43 @@
 
     <br>
     <br>
+    <h1>&nbsp;&nbsp;&nbsp;<u>Your lists</u></h1>
 
     <table class="wishListsTable" style="width:100%">
 
         <div th:each="wishListRep : ${wishListAll}">
 
             <tr>
-                <td>
+                <!--<td>
                     <span th:text="${wishListRep.getWishListID()}"></span>
-                </td>
+                </td> -->
                 <td>
                     <a th:href="@{/wishlists/{id}(id=${wishListRep.getWishListID()})}" href="showWishesPage.html">
                         <span th:text="${wishListRep.getWishlistName()}" class="Button_Effect"></span>
                     </a>
                 </td>
                 <td>
-                    <a th:href="@{'/updateWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect">Edit</a>
+                    <a th:href="@{'/updateWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect"><i class="fa fa-pencil-square-o icon"></i>Edit</a>
                 </td>
                 <td>
-                    <a th:href="@{'/deleteWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect_Delete">Delete</a>
+                    <a th:href="@{'/deleteWishList/' + ${wishListRep.getWishListID()}}" class="Button_Effect_Delete">Delete<i class="fa fa-times icon2"></i></a>
                 </td>
+                <td><div class="fillerSpace"></div></td>
+            </tr>
+            <tr style="height: 15px;">
+
             </tr>
 
         </div>
+
+
+
     </table>
+
+
+
+    <!--<img class="smokeIMG" th:src="@{img/smoke-effect-png.webp}" src="../static/img/smoke-effect-png.webp" alt="Genie smoke!">
+-->
 
 </body>
 
