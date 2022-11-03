@@ -5,27 +5,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
-	<title>Add a wish</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Create a Wish List</title>
 </head>
 <body>
 
-	<span th:replace="fragments/error"></span>
+	<!-- <span th:replace="fragments/error"></span> -->
+<div class="boxPosition">
 
-	<h1>Create a New Wish List:</h1>
-	<br>
+	<div class="createWishlistBorder">
+
+	<h1>&nbsp;&nbsp;&nbsp;&nbsp;<u>Create a New List:</u></h1>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/showWishListsPage}" href="showWishListsPage.html" class="Button_Effect"><i class="fa fa-reply icon"></i>Back to &nbsp;-&nbsp; Wish Lists Page</a> <br><br>
+
+		<br><br>
+
 	<form th:action="@{/createWishList}" th:object="${wishList}" th:method="post">
 
-		<label for="name-field">Wish List Name:</label>
-		<input id="name-field" type="text" name="wishlistName" placeholder="Enter a name for a new Wishlist" required>
-
-		<button type="submit" class="Button_Effect">Create List</button>
+		<!--<label for="name-field">Wish List Name:</label><br> -->
+		<input id="name-field" class="input-field" type="text" name="wishlistName" placeholder="Enter a new Wishlist" required>
+<br><br>
+		&nbsp;&nbsp;&nbsp;<button type="submit" class="Button_Effect">Create List<i class="fa fa-check-square-o icon"></i></button>
 
 	</form>
 
-	<br>
-	<a th:href="@{/showWishListsPage}" href="showWishListsPage.html" class="Button_Effect">Back to Wish Lists
-		Page</a>
-	<br>
-
+	</div>
+</div>
 </body>
 </html>

@@ -2,23 +2,37 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Register Page</title>
 </head>
 <body>
 
-<h1>New Wisher</h1>
-<h2>Enter your name & email for registration.</h2>
+<div class="boxPosition">
+
+<h1><u>Create New User</u></h1>
+<h2>&nbsp;&nbsp;Please enter:</h2>
+
 
 <form th:action="@{/registerPage}" th:object="${user}" th:method="post">
-    <label for="name-field">Name: </label>
-    <input id="name-field" name="name" required="required">
-    <label for="email-field">Email: </label>
-    <input id="email-field" name="email" type="email" required="required">
-    <label for="password-field">Password: </label>
-    <input id="password-field" name="password" type="password" required="required" maxlength="8">
+   <!-- &nbsp;&nbsp;<label for="name-field"> Name: </label> -->
+    <input class="input-field" id="name-field" placeholder="Enter name..." name="name" required="required"><br><br>
+   <!-- &nbsp;&nbsp;<label for="email-field">Email: </label> -->
+   <input class="input-field" id="email-field" placeholder="Enter email..." name="email" type="email" required="required"><br><br>
+   <!-- &nbsp;&nbsp;<label for="password-field">Password: </label> -->
+   <input class="input-field" id="password-field" placeholder="Enter password..." name="password" type="password" required="required" maxlength="8">
 
-    <button type="submit" style >Register</button>
+    <br><br>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;<button class="registerBtn" type="submit">Register User<i class="fa fa-check-square icon"></i></button>
 </form>
+
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>

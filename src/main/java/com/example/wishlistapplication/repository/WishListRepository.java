@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public class WishListRepository {
-
+    
     DatabaseServices databaseServices = new DatabaseServices();
 
     public List<WishList> getAllWishLists() {
@@ -21,6 +21,7 @@ public class WishListRepository {
             while (resultSet.next()) {
                 int wishListID = resultSet.getInt("wishListID");
                 int UserID = resultSet.getInt("UserID");
+
                 String wishlistName = resultSet.getString("wishlistName");
                 listOfAllWishlists.add(new WishList(wishListID, UserID, wishlistName));
             }
@@ -50,7 +51,8 @@ public class WishListRepository {
         return listOfAllWishlists;
     }
 
-    public void addWishlist(WishList newWishList) throws SQLException {
+
+    public void addWishlist(WishList newWishList) throws SQLException {        
         String queryCreate = "INSERT INTO WishLists (wishlistName, UserID) VALUES (?, ?)";
         PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
         psts.setString(1, newWishList.getWishlistName());
@@ -76,7 +78,7 @@ public class WishListRepository {
         } catch (SQLException e) {
             e.getStackTrace();
         }
-
+        
         return wishList;
     }
 

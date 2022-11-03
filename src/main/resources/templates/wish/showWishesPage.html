@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
-    <title>Create wishlist:</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>List of Wishes</title>
 </head>
 
 <header>
@@ -39,16 +40,18 @@
 
 <table class="wishlistTable" style="width:100%">
 
-<div th:each="wishRep : ${wishAll}">
+<div th:each="wish : ${wishAll}">
 
     <tr>
         <th><span></span></th>
         <!--  <th><span th:text="${w.getWishNumber()}"></span></th> -->
-        <td><span th:text="${wishRep.wishAll()}"></span></td>
+        <td><span th:text="${wish.getWishDescription()}"></span></td>
 
-        <th><span><a th:href="@{'/updateWishData/' + ${wishRep.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
-        <th><span><a th:href="@{'/deleteWishData/' + ${wishRep.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
+        <th><span><a th:href="@{'/updateWishData/' + ${wish.getWishNumber()}}" class="Button_Effect">Change</a></span></th>
+        <th><span><a th:href="@{'/deleteWishData/' + ${wish.getWishNumber()}}" class="Button_Effect_Delete">Remove</a></span></th>
+
     </tr>
+
 
 </div>
 

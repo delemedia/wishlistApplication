@@ -4,32 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Welcome to Wishlist:</title>
 </head>
 <body>
 
-<h1>Welcome to the Wishlist:</h1>
+<div class="boxPosition">
+
+<div class="showIndex_Box">
+
+<div class="showIndexBorder">
+
+    <h1>&nbsp;&nbsp;&nbsp;&nbsp;Welcome to <br>&nbsp;<u>the Wishlist app:</u></h1>
 
 
-<br>
-<span th:text="${#authentication}"></span>
-<br>
+<!-- <br> -->
+<!-- <span th:text="${#authentication}"></span> -->
+<!-- <br> -->
+
+
+    <div class="showIndex_ButtonBox">
 <span sec:authorize="hasRole('USER')">
-        USER LOGGED IN
+        <!-- USER LOGGED IN -->
     <br>
     <a th:href="@{/logout}"class="Button_Effect">Log Out</a>
 </span>
-<br>
-<span sec:authorize="!hasRole('USER')">
-        USER NOT LOGGED IN
-    <br>
-<a th:href="@{/login}"class="Button_Effect">Log In</a>
-<br>
-<br>
-<a th:href="@{/registerPage}" class="Button_Effect">Register</a>
-</span>
 
+<span sec:authorize="!hasRole('USER')">
+        <!--USER NOT LOGGED IN -->
+    <br>
+<a th:href="@{/login}"class="Button_Effect"><i class="fa fa-user-circle icon"></i>- Log-in</a>
+<br><br>
+<br> <a th:href="@{/registerPage}" class="Button_Effect"><i class="fa fa-vcard icon"></i>- Register</a>
+</span>
+    </div>
+</div>
+</div>
+
+</div>
 
 </body>
 </html>

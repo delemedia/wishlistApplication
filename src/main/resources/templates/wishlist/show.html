@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>WishLists</title>
 </head>
     <body>
@@ -12,31 +13,43 @@
             <div class="HeaderContainer">
         
                 <div class="TopHeaderSplashIMG">
-                    <div>WishList Title:</div>
+
                     <div class="splashText" th:text="${wishList.getWishlistName()}"></div>
                 </div>
 
-                <a th:href="@{/showWishListsPage}" class="Button_Effect">All Wishlists</a>
-                <a th:href="@{/createWish?wishlist_id={id}(id=${wishList.getWishListID()})}" class="Button_Effect">Add Wish</a>
-        
+                <br><br>
+
+                <div class="wishListsButtons_Container">
+
+                    <div class="wishListsButtons_ContainerStyle" style="width:100%">
+
+                       <!-- <a th:href="@{/createWish?wishlist_id=${wishList.getWishListID()}}" class="Button_Effect_wish"><i class=" fa fa-plus icon"></i>Add a new Wish</a> -->
+
+               <a th:href="@{/createWish?wishlist_id={id}(id=${wishList.getWishListID()})}" class="Button_Effect">Add Wish</a>
+
+                        <a th:href="@{/showWishListsPage}" class="Button_Effect_wish"><i class=" fa fa-reply icon"></i>Back to your lists</a>
+                    </div>
+
+                </div>
+
             </div>
         </header>
-        
-        <span th:replace="fragments/error"></span>
-        <h1>Your Wishes</h1>
+        <br><br>
+      <!--  <span th:replace="fragments/error"></span> -->
+        <h1>&nbsp;&nbsp;<u>Your Wishes</u></h1>
         <table class="wishListsTable" style="width:100%">
-            <thead>
+           <!-- <thead>
                 <tr>
                     <th>ID</th>
                     <th>Content</th>
                     <th>Options</th>
                 </tr>
-            </thead>
+            </thead>  -->
             <div th:each="wish : ${wishes}">
                 <tr>
-                    <td>
+                  <!--  <td>
                         <span th:text="${wish.getWishNumber()}"></span>
-                    </td>
+                    </td>  -->
                     <td>
                         <span th:text="${wish.getWishDescription()}"></span>
                     </td>
@@ -46,7 +59,14 @@
                     <td>
                         <a th:href="@{/deleteWishData/{wishNumber}/{wishListID}(wishNumber=${wish.getWishNumber()}, wishListID=${wishList.getWishListID()}) }" class="Button_Effect_Delete">Delete</a>
                     </td>
+                    <td><div class="fillerSpaceWishes"></div></td>
                 </tr>
+
+                <tr style="height: 15px;">
+
+                </tr>
+
+
             </div>
         </table>
 
