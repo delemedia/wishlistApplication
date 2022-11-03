@@ -1,7 +1,6 @@
 package com.example.wishlistapplication.repository;
 
 import com.example.wishlistapplication.model.Contributer;
-import com.example.wishlistapplication.model.Wish;
 import com.example.wishlistapplication.utilities.DatabaseServices;
 import org.springframework.stereotype.Repository;
 
@@ -14,18 +13,18 @@ import java.util.List;
 @Repository
 public class ContributerRepository {
 
-    List<Contributer> listOfAllContributers = new LinkedList<>();
     DatabaseServices databaseServices = new DatabaseServices();
 
     public List<Contributer> getAllContributers() {
-
+        List<Contributer> listOfAllContributers = new LinkedList<>();
         try {
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM Contributer");
             ResultSet resultSet = psts.executeQuery();
 
             while (resultSet.next()) {
                 String contributerName = resultSet.getString("contributerName");
-                listOfAllContributers.add(new Contributer(contributerName));
+                int wishId = resultSet.getInt("WisheswishID");
+                listOfAllContributers.add(new Contributer(contributerName,wishId));
             }
 
         } catch (SQLException dbConnectError) {
@@ -49,24 +48,21 @@ public class ContributerRepository {
     }
 
 
-    public Contributer findContributerByWisheswishID(String inputWisheswishID) {
-        Contributer contributerObject = new Contributer();
-        contributerObject.setContributerName(inputWisheswishID);
+    public Contributer findContributerByWisheswishID(int inputWisheswishID) {
 
         try {
-            String queryCreate = "SELECT * FROM Conttributer WHERE conttributerName=?";
+            String queryCreate = "SELECT * FROM Contributer WHERE WisheswishID=?";
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
-            psts.setInt(1, Integer.parseInt(inputWisheswishID)); //Foreign Key Problems
+            psts.setInt(1, inputWisheswishID);
             ResultSet rs = psts.executeQuery();
             rs.next();
-            String inputContributerName = rs.getString(2);
-            contributerObject.setContributerName(inputContributerName);
-            System.out.println(contributerObject);
+            String contributerName = rs.getString("contributerName");
+            return new Contributer(contributerName, inputWisheswishID);
 
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
-        return contributerObject;
+        return null;
     }
 
 
@@ -81,6 +77,20 @@ public class ContributerRepository {
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
+    }
+    public boolean checkIfContributerFree(boolean inputWisheswishID){
+
+        try {
+            String queryCreate = "SELECT * FROM Contributer WHERE contributerName=? IS NULL";
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
+            psts.setBoolean(1, inputWisheswishID);
+            psts.executeQuery();
+
+        } catch (SQLException dbConnectErorr) {
+            databaseServices.dbConnectionError(dbConnectErorr);
+        }
+        //lave method der returnere boolean alt efter om en wish har en contributer.
+        return true;
     }
 }
 

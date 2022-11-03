@@ -21,7 +21,8 @@ public class WishListRepository {
             while (resultSet.next()) {
                 int wishListID = resultSet.getInt("wishListID");
                 int UserID = resultSet.getInt("UserID");
-                String wishlistName = resultSet.getString("wishlistName");                
+
+                String wishlistName = resultSet.getString("wishlistName");
                 listOfAllWishlists.add(new WishList(wishListID, UserID, wishlistName));
             }
         } catch (SQLException dbConnectError) {
@@ -41,7 +42,7 @@ public class WishListRepository {
             while (resultSet.next()) {
                 int wishListID = resultSet.getInt("wishListID");
                 int UserID = resultSet.getInt("UserID");
-                String wishlistName = resultSet.getString("wishlistName");                
+                String wishlistName = resultSet.getString("wishlistName");
                 listOfAllWishlists.add(new WishList(wishListID, UserID, wishlistName));
             }
         } catch (SQLException dbConnectError) {
@@ -49,6 +50,7 @@ public class WishListRepository {
         }
         return listOfAllWishlists;
     }
+
 
     public void addWishlist(WishList newWishList) throws SQLException {        
         String queryCreate = "INSERT INTO WishLists (wishlistName, UserID) VALUES (?, ?)";
@@ -69,15 +71,15 @@ public class WishListRepository {
             ResultSet rs = psts.executeQuery();
             rs.next();
             wishList = new WishList(
-                rs.getInt("wishListID"),
-                rs.getInt("UserID"),
-                rs.getString("wishlistName")
-            ); 
+                    rs.getInt("wishListID"),
+                    rs.getInt("UserID"),
+                    rs.getString("wishlistName")
+            );
         } catch (SQLException e) {
             e.getStackTrace();
         }
-
-        return wishList;        
+        
+        return wishList;
     }
 
 
@@ -102,3 +104,4 @@ public class WishListRepository {
         }
     }
 }
+

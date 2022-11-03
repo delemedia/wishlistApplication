@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
     <title>WishList Sharing</title>
 </head>
-<h1>Your Friend's Wishes</h1>
+
 <body>
+<h1>Name's Wishes</h1>
 
-<form action="/inputContributer" method="post">
+<table class="wishlistTable" style="width:100%">
 
-    <label for="name-field">Contributers:</label>
-    <input id="name-field" name="contributerName" placeholder="Enter your name here...">
-    <button type="submit" class="Button_Effect">Submit</button>
+    <div th:each="wishRep : ${wishAll}">
 
-</form>
+        <tr>
+            <th><span></span></th>
+            <td><span th:text="${wishRep.wishAll()}"></span></td>
+
+            <th><span><a th:href="@{'/addContributer/' + ${wishRep.getWishNumber()}}" class="Button_Effect">Add Name</a></span></th>
+        </tr>
+
+    </div>
+
+</table>
+
 
 </body>
 </html>
