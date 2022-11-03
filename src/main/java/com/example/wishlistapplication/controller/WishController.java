@@ -32,6 +32,7 @@ public class WishController {
         return "wish/showWishesPage";
     }
 
+
     // CREATE
     @GetMapping("/createWish")
     public String instantiate(Model model) {
