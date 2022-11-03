@@ -3,12 +3,13 @@ package com.example.wishlistapplication.model;
 public class Contributer {
 
     private String contributerName;
-    //private int wisheswishID;
+    private int WisheswishID;
 
-    public Contributer(){}
+    public Contributer (){}
 
-    public Contributer(String contributerName){
+    public Contributer(String contributerName, int WisheswishID){
         this.contributerName = contributerName;
+        this.WisheswishID = WisheswishID;
     }
 
     public String getContributerName() {
@@ -17,6 +18,14 @@ public class Contributer {
 
     public void setContributerName(String contributerName) {
         this.contributerName = contributerName;
+    }
+
+    public int getWisheswishID() {
+        return WisheswishID;
+    }
+
+    public void setWisheswishID(int wisheswishID) {
+        WisheswishID = wisheswishID;
     }
 
     @Override
