@@ -51,7 +51,7 @@
                         <span th:text="${wish.getWishNumber()}"></span>
                     </td>  -->
                     <td>
-                        <span th:text="${wish.getWishDescription()}"></span>
+                        <span class="wishDataStyle" th:text="${wish.getWishDescription()}"></span>
                     </td>
                     <td>
                         <a th:href="@{'/updateWishData/' + ${wish.getWishNumber()}}" class="Button_Effect">Edit</a>

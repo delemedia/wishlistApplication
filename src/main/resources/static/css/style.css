@@ -233,7 +233,7 @@ label {
 .input-field {
     padding: 5px;
     outline: none;
-    font-family: "gabriola";
+    font-family: "Ink Free";
     font-size: 20px;
     cursor: pointer;
 
@@ -348,6 +348,12 @@ body {
 
 }
 
+.wishDataStyle {
+
+    font-size: 30px;
+    font-family: "Ink Free";
+
+}
 
 
 
