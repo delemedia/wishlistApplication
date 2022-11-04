@@ -34,6 +34,7 @@ public class WishRepository {
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
+
         return listOfAllWishes;
     }
 

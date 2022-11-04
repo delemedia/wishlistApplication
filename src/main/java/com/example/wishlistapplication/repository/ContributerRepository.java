@@ -78,7 +78,7 @@ public class ContributerRepository {
             databaseServices.dbConnectionError(dbConnectError);
         }
     }
-    public boolean checkIfContributerFree(boolean inputWisheswishID){
+    public boolean checkIfNoContributer(boolean inputWisheswishID){
 
         try {
             String queryCreate = "SELECT * FROM Contributer WHERE contributerName=? IS NULL";

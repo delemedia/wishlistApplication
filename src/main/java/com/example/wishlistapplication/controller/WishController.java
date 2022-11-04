@@ -100,7 +100,7 @@ public class WishController {
         }
 
         wishRepository.deleteWishById(wishNumber);
-        return "redirect:/showWishesPage";
+        return "redirect:/";
         //return "redirect:/wishlists/" + wishlistID;
     }
 }

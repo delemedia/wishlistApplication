@@ -12,11 +12,11 @@
 
 <table class="wishlistTable" style="width:100%">
 
-    <div th:each="wishRep : ${wishAll}">
+    <div th:each="wish : ${wishAll}">
 
         <tr>
             <th><span></span></th>
-            <td><span th:text="${wishRep.wishAll()}"></span></td>
+            <td><span th:text="${wish.getWishDescription()}"></span></td>
 
             <th><span><a th:href="@{'/addContributer/' + ${wishRep.getWishNumber()}}" class="Button_Effect">Add Name</a></span></th>
         </tr>
