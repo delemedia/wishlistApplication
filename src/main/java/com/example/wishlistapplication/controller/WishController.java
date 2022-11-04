@@ -1,7 +1,6 @@
 package com.example.wishlistapplication.controller;
 
 import com.example.wishlistapplication.config.CustomUserDetails;
-import com.example.wishlistapplication.model.User;
 import com.example.wishlistapplication.model.Wish;
 import com.example.wishlistapplication.model.WishList;
 import com.example.wishlistapplication.repository.WishListRepository;
@@ -25,13 +24,14 @@ public class WishController {
         this.wishListRepository = wishListRepository;
     }
 
-    // SHOW
-    @GetMapping("/showWishesPage")
-    public String show(Model model) {
+    // SHOW WISHES
+    //@GetMapping("/showWishes")
+    @GetMapping("/showWishes")
+    public String showWishes(Model model) {
         model.addAttribute("wishAll", wishRepository.getAllWishes());
         return "wish/showWishesPage";
+        //return "wish/showWishesPage";
     }
-
 
     // CREATE
     @GetMapping("/createWish")
@@ -76,7 +76,7 @@ public class WishController {
         WishList dbWishList = wishListRepository.findWishlistByID(dbWish.getWishListID());
         if (dbWishList.getUserID() != authUser.getId()) {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
-            return "redirect:/";
+            return "redirect:/showWishes";
         }
 
         try {
@@ -97,11 +97,11 @@ public class WishController {
         WishList dbWishList = wishListRepository.findWishlistByID(dbWish.getWishListID());
         if (dbWishList.getUserID() != authUser.getId()) {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
-            return "redirect:/showWishesPage";
+            return "redirect:/showWishes";
         }
 
         wishRepository.deleteWishById(wishNumber);
-        return "redirect:/showWishesPage";
-        //return "redirect:/wishlists/" + wishlistID;
+
+        return "redirect:/wishlists/" + wishlistID;
     }
 }

@@ -2,14 +2,12 @@ package com.example.wishlistapplication.controller;
 
 import com.example.wishlistapplication.config.CustomUserDetails;
 import com.example.wishlistapplication.model.WishList;
+import com.example.wishlistapplication.repository.UserRepository;
 import com.example.wishlistapplication.repository.WishListRepository;
 import com.example.wishlistapplication.repository.WishRepository;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,35 +18,38 @@ public class WishlistController {
 
     private WishListRepository wishListRepository;
     private WishRepository wishRepository;
+    private UserRepository userRepository;
 
     public WishlistController(WishListRepository wishListRep, WishRepository wishRepository) {
         wishListRepository = wishListRep;
         this.wishRepository = wishRepository;
     }
 
-    // INDEX
+    // INDEX OF WISHLISTS
     @GetMapping("/showWishListsPage")
     public String showWishListsPage(Model model) {
-
         CustomUserDetails authUser = CustomUserDetails.GetAuthenticatedUser();
+
         model.addAttribute("wishListAll", wishListRepository.findWhere("UserID", authUser.getId()));
-        return "wishlist/index";
+        model.addAttribute("user", authUser);
+        return "wishlist/indexOfWishLists";
     }
 
-    // SHOW
+    // SHOW WISHES FOR SPECIFIC WISHLIST
     @GetMapping("/wishlists/{id}")
-    public String show(Model model, @PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+    public String showWishesSpecific(Model model, @PathVariable("id") int id, RedirectAttributes redirectAttributes) {
 
         CustomUserDetails authUser = CustomUserDetails.GetAuthenticatedUser();
+
         WishList dbWishList = wishListRepository.findWishlistByID(id);
         if (dbWishList.getUserID() != authUser.getId()) {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
-            return "redirect:/";
+            return "redirect:/showWishListsPage";
         }
 
         model.addAttribute("wishList", dbWishList);
         model.addAttribute("wishes", wishRepository.findWhere("WishListID", dbWishList.getWishListID()));
-        return "wishlist/show";
+        return "wishlist/showWishesForSpecificWishList";
     }
 
     // NEW

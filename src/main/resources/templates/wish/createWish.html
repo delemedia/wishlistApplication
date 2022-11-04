@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Add Wish</title>
-        
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Add Wish</title>
+
+</head>
 
 
-    <body>
+<body>
 
-    <div class="boxPosition">
+<div class="boxPosition">
 
     <div class="createWishBorder">
 
-    <h1>&nbsp;&nbsp;&nbsp;<u>Create a New Wish</u></h1>
+        <h1>&nbsp;&nbsp;&nbsp;<u>Create a New Wish</u></h1>
 
 
-
-        &nbsp;&nbsp;&nbsp;&nbsp; <a th:href="@{/showWishesPage}" href="showWishesPage.html" class="Button_Effect">Back to Wishlist</a>
-<br><br><br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <form>
+            <input type="button" class="Button_Effect" value="Back to - wishes" onclick="history.back()">
+        </form>
+        <br><br><br><br>
         <form th:action="@{/createWish}" th:object="${wish}" th:method="post">
             <input type="hidden" name="wishListID" th:value="${param.wishlist_id}">
 
-          <!--  <label for="name-field">Wish Description:</label> -->
-            <input id="name-field" class="input-field" type="text" name="wishDescription" placeholder="Enter your wish here...">
-<br><br>
-            &nbsp;&nbsp;&nbsp;&nbsp; <button type="submit" class="Button_Effect">Add your wish</button>
+            <!--  <label for="name-field">Wish Description:</label> -->
+            <input id="name-field" class="input-field" type="text" name="wishDescription"
+                   placeholder="Enter your wish here...">
+            <br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="Button_Effect">Add your wish</button>
 
         </form>
 
     </div>
 
-    </div>
+</div>
 
-    </body>
+</body>
 </html>

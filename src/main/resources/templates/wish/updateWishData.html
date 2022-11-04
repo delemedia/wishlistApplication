@@ -15,7 +15,10 @@
 
             <h1>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<u>Change a wish</u></h1>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a th:href="@{/showWishesPage}" href="showWishesPage.html" class="Button_Effect"><i class="fa fa-reply icon"></i>Back to - wishes</a>
+            <form>
+                <input type="button" class="Button_Effect" value="Back to - wishes" onclick="history.back()">
+            </form>
+
             <br><br>  <br><br>
 
         <form th:action="@{/updateWishData/}" th:object="${wish}" th:method="patch">
