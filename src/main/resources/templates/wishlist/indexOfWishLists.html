@@ -13,7 +13,7 @@
         <div class="HeaderContainer">
     
             <div class="TopHeaderSplashIMG">
-                <div class="splashText"> Your <br> &nbsp;Wish Lists</div>
+                <div class="splashText"> &nbsp;&nbsp;&nbsp;Your <br> &nbsp;Wish Lists</div>
             </div>
 
         </div>
@@ -50,7 +50,7 @@
                 </td> -->
                 <td>
                     <a th:href="@{/wishlists/{id}(id=${wishListRep.getWishListID()})}" href="showWishesPage.html">
-                        <span th:text="${wishListRep.getWishlistName()}" class="Button_Effect"></span>
+                        <span th:text="${wishListRep.getWishlistName()}" class="Button_Effect_list"></span>
                     </a>
                 </td>
                 <td>

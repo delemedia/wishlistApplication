@@ -177,6 +177,22 @@
     color: black;
 }
 
+.Button_Effect_list {
+    text-decoration: none;
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10%;
+    font-family: "gabriola";
+    font-size: 30px;
+}
+
+.Button_Effect_list:hover {
+    opacity: 70%;
+    color: black;
+}
+
+
 /* The new style code lines: */
 
 h1 {
@@ -320,7 +336,7 @@ body {
 
     border: dotted gold 2px;
     width: 280px;
-    height: 320px;
+    height: 350px;
 
 }
 
@@ -335,8 +351,8 @@ body {
 .updateWishDataBorder {
 
     border: dotted gold 2px;
-    width: 300px;
-    height: 320px;
+    width: 280px;
+    height: 340px;
 
 }
 
