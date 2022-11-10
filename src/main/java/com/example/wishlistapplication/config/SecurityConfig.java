@@ -30,6 +30,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/showWishListsPage",
+                        "/indexOfWishLists",
+                        "/showWishlistWishes",
                         "/createWishList",
                         "/updateWishList**",
                         "/deleteWishList**",
