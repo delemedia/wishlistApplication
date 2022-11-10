@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Change a wish</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Change a wish</title>
+</head>
+<body>
 
-    <div class="boxPosition">
+<div class="boxPosition">
 
-        <div class="updateWishDataBorder">
+    <div class="updateWishDataBorder">
 
-            <h1>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<u>Change a wish</u></h1>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <form>
-                <input type="button" class="Button_Effect" value="Back to - wishes" onclick="history.back()">
-            </form>
+        <h1>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<u>Change a wish</u></h1>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <form>
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="Button_Effect" value="Back to - wishes" onclick="history.back()">
+        </form>
 
-            <br><br>  <br><br>
+        <br><br>
 
         <form th:action="@{/updateWishData/}" th:object="${wish}" th:method="patch">
             <input type="hidden" name="wishNumber" th:value="${wish.getWishNumber()}">
             <input type="hidden" name="WishListID" th:value="${wish.getWishListID()}">
 
-           <!-- <label for="name-field">Your wish: </label> -->
+            <!-- <label for="name-field">Your wish: </label> -->
             <input id="name-field" class="input-field" name="wishDescription" placeholder="Change your wish..." th:value="${wish.getWishDescription()}">
 
             <br><br>
 
-            &nbsp;&nbsp; <button type="submit" class="Button_Effect">Change wish</button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <button type="submit" class="Button_Effect">Change wish</button>
 
         </form>
 
-        </div>
     </div>
+</div>
 
-    </body>
+</body>
 </html>
