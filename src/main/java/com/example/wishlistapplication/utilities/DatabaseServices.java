@@ -1,15 +1,12 @@
 package com.example.wishlistapplication.utilities;
 
-import com.example.wishlistapplication.model.User;
 import org.springframework.beans.factory.annotation.Value;
-
 import java.sql.*;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class DatabaseServices {
 
-    // Database username & password proxy values
+    // Database username & password
     @Value("${spring.datasource.url}")
     private String wishlistdb_url = "jdbc:mysql://localhost:3306/wishlistdb";
 

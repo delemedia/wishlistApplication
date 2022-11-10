@@ -25,12 +25,12 @@ public class WishController {
     }
 
     // SHOW WISHES
-    //@GetMapping("/showWishes")
     @GetMapping("/showWishes")
-    public String showWishes(Model model) {
-        model.addAttribute("wishAll", wishRepository.getAllWishes());
-        return "wish/showWishesPage";
-        //return "wish/showWishesPage";
+    public String showWishes(Model model, @PathVariable("id") int id) {
+        WishList dbWishList = wishListRepository.findWishlistByID(id);
+        model.addAttribute("wishList", dbWishList);
+        model.addAttribute("wishes", wishRepository.findWhere("WishListID", dbWishList.getWishListID()));
+        return "wish/showWishlistWishes";
     }
 
     // CREATE

@@ -1,6 +1,7 @@
 package com.example.wishlistapplication.repository;
 
 import com.example.wishlistapplication.model.Contributer;
+import com.example.wishlistapplication.model.Wish;
 import com.example.wishlistapplication.utilities.DatabaseServices;
 import org.springframework.stereotype.Repository;
 

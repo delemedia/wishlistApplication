@@ -94,10 +94,20 @@ public class WishListRepository {
 
     public void deleteWishList(int inputWishListID) {
         try {
-            String queryCreate = "DELETE FROM WishLists WHERE wishListID=?";
-            PreparedStatement psts = databaseServices.dbConnection().prepareStatement(queryCreate);
-            psts.setInt(1, inputWishListID);
-            psts.executeUpdate();
+            String query1 = """
+                    DELETE FROM Wishes 
+                    WHERE wishlistID=?;
+                    """;
+            PreparedStatement statement1 = databaseServices.dbConnection().prepareStatement(query1);
+            statement1.setInt(1,inputWishListID);
+            statement1.executeUpdate();
+            String query2 = """
+                    DELETE FROM WishLists
+                    WHERE wishListID=?;
+                            """;
+            PreparedStatement statement2 = databaseServices.dbConnection().prepareStatement(query2);
+            statement2.setInt(1, inputWishListID);
+            statement2.executeUpdate();
 
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);

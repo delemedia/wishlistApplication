@@ -9,6 +9,10 @@ public class Wish {
 
     public Wish (){}
 
+    public Wish (String wishDescription) {
+        this.wishDescription = wishDescription;
+    }
+
     public Wish(int wishNumber, int wishListID, String wishDescription) {
         this.wishNumber = wishNumber;
         this.wishListID = wishListID;

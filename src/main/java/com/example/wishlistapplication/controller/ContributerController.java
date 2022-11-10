@@ -23,9 +23,8 @@ public class ContributerController {
     WishListRepository wishListRepository;
 
     @GetMapping("/shareList")
-    public String shareList(Model model) throws SQLException {
-        System.out.println(wishRepository.getAllWishes());
-        model.addAttribute("wishAll", wishRepository.getAllWishes());
+    public String shareList(Model model)  {
+
         return "contributer/wishListSharingPage";
     }
 
@@ -41,7 +40,7 @@ public class ContributerController {
 
         model.addAttribute("wishList", dbWishList);
         model.addAttribute("wishes", wishRepository.findWhere("WishListID", dbWishList.getWishListID()));
-        return "wishlist/showWishesForSpecificWishlist";
+        return "wish/showWishlistWishes";
     }
 
 
@@ -63,7 +62,7 @@ public class ContributerController {
             return "redirect:/addContributer";
         }
         contributerRepository.addContributer(contributer);
-        return "redirect:/contributer/" + dbWishList.getWishListID(); //
+        return "redirect:/contributer/" + dbWishList.getWishListID(); //??
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.wishlistapplication.controller;
 
 import com.example.wishlistapplication.config.CustomUserDetails;
+import com.example.wishlistapplication.model.Wish;
 import com.example.wishlistapplication.model.WishList;
 import com.example.wishlistapplication.repository.UserRepository;
 import com.example.wishlistapplication.repository.WishListRepository;
@@ -31,7 +32,6 @@ public class WishlistController {
         CustomUserDetails authUser = CustomUserDetails.GetAuthenticatedUser();
 
         model.addAttribute("wishListAll", wishListRepository.findWhere("UserID", authUser.getId()));
-        model.addAttribute("user", authUser);
         return "wishlist/indexOfWishLists";
     }
 
@@ -49,7 +49,7 @@ public class WishlistController {
 
         model.addAttribute("wishList", dbWishList);
         model.addAttribute("wishes", wishRepository.findWhere("WishListID", dbWishList.getWishListID()));
-        return "wishlist/showWishesForSpecificWishList";
+        return "wish/showWishlistWishes";
     }
 
     // NEW
@@ -104,16 +104,18 @@ public class WishlistController {
 
     // DELETE
     @GetMapping("/deleteWishList/{wishListID}")
-    public String deleteWishList(@PathVariable("wishListID") int deleteWishListID, RedirectAttributes redirectAttributes) {
+    public String deleteWishList(@PathVariable("wishListID") int inputWishListId, RedirectAttributes redirectAttributes) {
 
         CustomUserDetails authUser = CustomUserDetails.GetAuthenticatedUser();
-        WishList dbWishList = wishListRepository.findWishlistByID(deleteWishListID);
+        WishList dbWishList = wishListRepository.findWishlistByID(inputWishListId);
         if (dbWishList.getUserID() != authUser.getId()) {
             redirectAttributes.addAttribute("error", "OPERATION NOT ALLOWED!");
             return "redirect:/showWishListsPage";
         }
 
-        wishListRepository.deleteWishList(deleteWishListID);
+        wishListRepository.deleteWishList(inputWishListId);
         return "redirect:/showWishListsPage";
     }
+
+
 }

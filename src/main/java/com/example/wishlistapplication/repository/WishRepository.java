@@ -13,11 +13,10 @@ import javax.xml.crypto.dsig.spec.RSAPSSParameterSpec;
 @Repository
 public class WishRepository {
 
-    List<Wish> listOfAllWishes = new LinkedList<>();
     DatabaseServices databaseServices = new DatabaseServices();
 
     public List<Wish> getAllWishes() {
-
+        List<Wish> listOfAllWishes = new LinkedList<>();
         try {
             PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM wishes");
             ResultSet resultSet = psts.executeQuery();
@@ -107,6 +106,25 @@ public class WishRepository {
         } catch (SQLException dbConnectError) {
             databaseServices.dbConnectionError(dbConnectError);
         }
+    }
+
+    public List<Wish> getAllWishesbyId() {
+
+        List<Wish> listOfAllWishesById = null;
+        try {
+            PreparedStatement psts = databaseServices.dbConnection().prepareStatement("SELECT * FROM wishes WHERE WishListID= ?");
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                String wishDescription = resultSet.getString("wishDescription");
+                listOfAllWishesById = new LinkedList<>();
+                listOfAllWishesById.add(new Wish(wishDescription));
+            }
+
+        } catch (SQLException dbConnectError) {
+            databaseServices.dbConnectionError(dbConnectError);
+        }
+        return listOfAllWishesById;
     }
 
 }
